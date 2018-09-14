@@ -90,7 +90,7 @@ int TBitField::operator==(const TBitField &bf) const // сравнение
 		return 0;
 	}
 	int r;
-	r = memcmp(pMem, bf.pMem, BitLen);
+	r = memcmp(pMem, bf.pMem, (BitLen - 1) * sizeof(TELEM));
 	if (r == 0)
 	{
 		return 0;
@@ -109,7 +109,30 @@ int TBitField::operator==(const TBitField &bf) const // сравнение
 
 int TBitField::operator!=(const TBitField &bf) const // сравнение
 {
-  return 0;
+	if (this == &bf)
+	{
+		return 0;
+	}
+	if (BitLen != bf.BitLen)
+	{
+		return 1;
+	}
+	int r;
+	r = memcmp(pMem, bf.pMem, (BitLen - 1) * sizeof(TELEM));
+	if (r == 0)
+	{
+		return 1;
+	}
+	TELEM m = 1;
+	for (int i = 0; i < BitLen / (sizeof(TELEM) * 8); i++)
+	{
+		if (m & pMem[MemLen - 1] != m & bf.pMem[MemLen - 1])
+		{
+			return 1;
+		}
+		m <<= 1;
+	}
+	return 0;
 }
 
 TBitField TBitField::operator|(const TBitField &bf) // операция "или"

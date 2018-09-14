@@ -9,33 +9,46 @@
 
 TBitField::TBitField(int len)
 {
+	BitLen = len;
+	pMem = new TELEM[len];
+	MemLen = (len / sizeof(TELEM) + 1);
+
 }
 
 TBitField::TBitField(const TBitField &bf) // конструктор копирования
 {
+	if (this != &bf) {
+		BitLen = bf.BitLen;
+		MemLen = bf.MemLen;
+		pMem = new TELEM[MemLen];
+	}
 }
 
 TBitField::~TBitField()
 {
+	delete pMem[];
 }
 
 int TBitField::GetMemIndex(const int n) const // индекс Мем для бита n
 {
+	return (n / (sizeof(TELEM)*8));
 }
 
 TELEM TBitField::GetMemMask(const int n) const // битовая маска для бита n
 {
+	return (1 << n) % (sizeof(TELEM) * 8);
 }
 
 // доступ к битам битового поля
 
 int TBitField::GetLength(void) const // получить длину (к-во битов)
 {
-  return 0;
+  return BitLen;
 }
 
 void TBitField::SetBit(const int n) // установить бит
 {
+
 }
 
 void TBitField::ClrBit(const int n) // очистить бит

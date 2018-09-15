@@ -9,6 +9,9 @@
 
 TBitField::TBitField(int len)
 {
+    BitLen = len;
+    MemLen = ceil(BitLen/(8 * sizeof(TELEM))); // нужна библиотека math.h для ceil()
+    pMem = new TELEM[MemLen];
 }
 
 TBitField::TBitField(const TBitField &bf) // конструктор копирования
@@ -17,6 +20,8 @@ TBitField::TBitField(const TBitField &bf) // конструктор копиро
 
 TBitField::~TBitField()
 {
+    delete(pMem);
+    pMem = NULL;
 }
 
 int TBitField::GetMemIndex(const int n) const // индекс Мем для бита n

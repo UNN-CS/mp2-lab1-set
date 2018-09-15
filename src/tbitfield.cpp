@@ -190,8 +190,32 @@ TBitField TBitField::operator~(void) // отрицание
 
 istream &operator>>(istream &istr, TBitField &bf) // ввод
 {
+	int l = bf.GetLength();
+	for (int i = 0; i < l; ++i)
+	{
+		char t;
+		cin >> t;
+		if (t != '0' && t != '1')
+		{
+			throw;
+		}
+		if (t == '0')
+		{
+			bf.ClrBit(i);
+		}
+		else if (t == '1')
+		{
+			bf.SetBit(i);
+		}
+	}
 }
 
 ostream &operator<<(ostream &ostr, const TBitField &bf) // вывод
 {
+	int l = bf.GetLength();
+	for (int i = 0; i < l; i++)
+	{
+		cout << bf.GetBit(i);
+	}
+	return ostr;
 }

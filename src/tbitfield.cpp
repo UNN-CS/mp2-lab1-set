@@ -84,24 +84,56 @@ TBitField& TBitField::operator=(const TBitField &bf) // присваивание
 
 int TBitField::operator==(const TBitField &bf) const // сравнение
 {
-  return 0;
+	int res = 1;
+	if (BitLen != bf.BitLen) res = 0;
+	else for (int i = 0; i < MemLen; i++)
+		if (pMem != bf.pMem) 
+		{
+			res = 0; break;
+		}
+	return res;
 }
 
 int TBitField::operator!=(const TBitField &bf) const // сравнение
 {
-  return 0;
+	int res = 0;
+	if (BitLen != bf.BitLen) res = 1;
+	else for (int i = 0; i < MemLen; i++)
+		if (pMem != bf.pMem)
+		{
+			res = 1; break;
+		}
+	return res;
 }
 
 TBitField TBitField::operator|(const TBitField &bf) // операция "или"
 {
+	int len;
+	if (BitLen > bf.BitLen) len = Bitlen;
+	else len = bf.BitLen;
+	TBitField tmp(len);
+	for (int i = 0; i < MemLen; i++) tmp.bMem[i] = bMem[i];
+	for (int i = 0; i < bf.MemLen; i++) tmp.bMem[i] |= bf.bMem;
+	return tmp;
 }
 
 TBitField TBitField::operator&(const TBitField &bf) // операция "и"
 {
+	int len;
+	if (BitLen > bf.BitLen) len = Bitlen;
+	else len = bf.BitLen;
+	TBitField tmp(len);
+	for (int i = 0; i < MemLen; i++) tmp.bMem[i] = bMem[i];
+	for (int i = 0; i < bf.MemLen; i++) tmp.bMem[i] &= bf.bMem;
+	return tmp;
 }
 
 TBitField TBitField::operator~(void) // отрицание
 {
+	int len = BitLen;
+	TBitField tmp(len);
+	for (int i = 0; i < MemLen; i++) tmp.pMem[i] = ~bMem[i];
+	return tmp;
 }
 
 // ввод/вывод

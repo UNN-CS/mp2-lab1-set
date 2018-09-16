@@ -7,20 +7,22 @@
 
 #include "tbitfield.h"
 
-TBitField::TBitField(int len)
+TBitField::TBitField(int len): BitLen(len)
 {
-	BitLen = len;
-	pMem = new TELEM[len];
 	MemLen = (len / sizeof(TELEM) + 1);
-
+	pMem = new TELEM[MemLen];
+	for (int i = 0; i < MemLen; i++)
+		pMem[i] = 0;
 }
 
 TBitField::TBitField(const TBitField &bf) // конструктор копирования
-{
-	if (this != &bf) {
+{	
+	if (&bf != NULL) {
 		BitLen = bf.BitLen;
 		MemLen = bf.MemLen;
 		pMem = new TELEM[MemLen];
+		for (int i = 0, i < MemLen; i++)
+			pMem[i] = bf.pMem[i];
 	}
 }
 

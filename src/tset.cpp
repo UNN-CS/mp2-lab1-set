@@ -17,13 +17,9 @@ TSet::TSet(int mp) : BitField(mp)
 }
 
 // конструктор копирования
-TSet::TSet(const TSet &s) : BitField(s.MaxPower)
+TSet::TSet(const TSet &s) : BitField(s.BitField)
 {
-	if (this != &s)
-	{
-		MaxPower = s.MaxPower;
-		BitField = s.BitField;
-	}
+	MaxPower = s.MaxPower;
 }
 
 // конструктор преобразования типа
@@ -44,17 +40,23 @@ int TSet::GetMaxPower(void) const // получить макс. к-во эл-т�
 
 int TSet::IsMember(const int Elem) const // элемент множества?
 {
-    return BitField.GetBit(Elem);
+	if (Elem < 0 || Elem >= MaxPower)
+		return 0;
+	return BitField.GetBit(Elem);
 }
 
 void TSet::InsElem(const int Elem) // включение элемента множества
 {
-	BitField.SetBit(Elem);
+	if (Elem < 0 || Elem >= MaxPower)
+		throw range_error("out of universe");
+	else
+		BitField.SetBit(Elem);
 }
 
 void TSet::DelElem(const int Elem) // исключение элемента множества
 {
-	BitField.ClrBit(Elem);
+	if(Elem >= 0 && Elem < MaxPower)
+		BitField.ClrBit(Elem);
 }
 
 // теоретико-множественные операции
@@ -75,12 +77,12 @@ int TSet::operator==(const TSet &s) const // сравнение
 	{
 		return 0;
 	}
-    return BitField == s.BitField;
+	return BitField == s.BitField;
 }
 
 int TSet::operator!=(const TSet &s) const // сравнение
 {
-	return (*this == s)?0:1;
+	return (*this == s) ? 0 : 1;
 }
 
 TSet TSet::operator+(const TSet &s) // объединение
@@ -91,6 +93,9 @@ TSet TSet::operator+(const TSet &s) // объединение
 
 TSet TSet::operator+(const int Elem) // объединение с элементом
 {
+	if (Elem < 0 || Elem >= MaxPower) {
+		throw range_error("out of universe");
+	}
 	TSet t(*this);
 	t.InsElem(Elem);
 	return t;
@@ -99,7 +104,8 @@ TSet TSet::operator+(const int Elem) // объединение с элемент
 TSet TSet::operator-(const int Elem) // разность с элементом
 {
 	TSet t(*this);
-	t.DelElem(Elem);
+	if(Elem >= 0 && Elem < MaxPower)
+		t.DelElem(Elem);
 	return t;
 }
 
@@ -122,19 +128,25 @@ istream &operator>>(istream &istr, TSet &s) // ввод
 	char i = 0;
 	char *p = input;
 	cin.getline(input, 1024);
-	
+
 	while (*p != 0)
 	{
-		while (isdigit(*p))
+		while (isdigit(*p) || *p == '-')
 		{
 			tmp[i++] = *p;
 			++p;
 		}
-		s.InsElem(atoi(tmp));
-		i = 0;
+		if (tmp[0] != 0) {
+			int el = atoi(tmp);
+			if (el < 0 || el >= s.GetMaxPower()) {
+				throw range_error("bad input");
+			}
+			s.InsElem(el);
+		}
 		for (int j = 0; j < 16; ++j)
 			tmp[j] = 0;
-
+		i = 0;
+		++p;
 	}
 	return istr;
 }

@@ -136,7 +136,6 @@ istream &operator>>(istream &istr, TSet &s) // ввод
 			tmp[j] = 0;
 
 	}
-
 	return istr;
 }
 

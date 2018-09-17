@@ -106,6 +106,14 @@ TSet TSet::operator~(void) // дополнение
 
 istream &operator>>(istream &istr, TSet &s) // ввод
 {
+	int tmp; char c;
+	do { istr >> c; } while (c != '{');
+	do {
+		istr >> tmp;
+		s.InsElem(tmp);
+		do { istr >> c; } while ((c != ',') && (c != '}'));
+	} while (c != '}');
+	return istr;
 }
 
 ostream& operator<<(ostream &ostr, const TSet &s) // вывод

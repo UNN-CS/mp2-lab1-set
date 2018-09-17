@@ -7,12 +7,38 @@
 
 #include "tset.h"
 
+int _atoi(char *str) {
+	char *p = str;
+	int r = 0;
+	int e = 1;
+	while (*(++p));
+	do {
+		--p;
+		if ((*p < '0' || *p > '9') && *p != '-') {
+			throw;
+		}
+		else if (*p == '-') {
+			return -r;
+		}
+		else {
+			r += (*p - '0') * e;
+			e *= 10;
+		}
+	} while (p != str);
+	return r;
+}
+
 TSet::TSet(int mp) : BitField(mp)
 {
-	MaxPower = mp;
-	for (int i = 0; i < MaxPower; ++i)
-	{
-		BitField.ClrBit(i);
+	if (mp > 0) {
+		MaxPower = mp;
+		for (int i = 0; i < MaxPower; ++i)
+		{
+			BitField.ClrBit(i);
+		}
+	}
+	else {
+		throw;
 	}
 }
 
@@ -137,7 +163,7 @@ istream &operator>>(istream &istr, TSet &s) // ввод
 			++p;
 		}
 		if (tmp[0] != 0) {
-			int el = atoi(tmp);
+			int el = _atoi(tmp);
 			if (el < 0 || el >= s.GetMaxPower()) {
 				throw range_error("bad input");
 			}

@@ -74,7 +74,7 @@ int TSet::IsMember(const int Elem) const // элемент множества?
 void TSet::InsElem(const int Elem) // включение элемента множества
 {
 	if (Elem < 0 || Elem >= MaxPower)
-		throw range_error("out of universe");
+		throw;
 	else
 		BitField.SetBit(Elem);
 }
@@ -120,7 +120,7 @@ TSet TSet::operator+(const TSet &s) // объединение
 TSet TSet::operator+(const int Elem) // объединение с элементом
 {
 	if (Elem < 0 || Elem >= MaxPower) {
-		throw range_error("out of universe");
+		throw;
 	}
 	TSet t(*this);
 	t.InsElem(Elem);
@@ -165,7 +165,7 @@ istream &operator>>(istream &istr, TSet &s) // ввод
 		if (tmp[0] != 0) {
 			int el = _atoi(tmp);
 			if (el < 0 || el >= s.GetMaxPower()) {
-				throw range_error("bad input");
+				throw;
 			}
 			s.InsElem(el);
 		}

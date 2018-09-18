@@ -7,7 +7,7 @@
 
 #include "tbitfield.h"
 
-TBitField::TBitField(int len)
+TBitField::TBitField(int len)   // предполагаетс€, что len - это не индекс, а количество
 {
     BitLen = len;
     MemLen = ((len)/((sizeof(TELEM))*8));  // дл€ ровно 32 бит (и кратных чисел) длина массива - 1.
@@ -110,6 +110,14 @@ int TBitField::operator==(const TBitField &bf) const // сравнение
                     return 0;
             }
 
+            for (int i = BitLen - 1; i > BitLen - ((BitLen - 1) % (sizeof(TELEM)*8 * BitLen / (sizeof(TELEM)*8))) ; i--) // проходим по битам последнего элемента массива, начина€ со старшего
+            {
+                if (GetBit(i) != bf.GetBit(i)
+                    return 0;
+            }
+
+            return 1; // вернет 1 в том случае, если всЄ совпало
+
         }
     }
     return 0; // если что-то не равно
@@ -117,27 +125,98 @@ int TBitField::operator==(const TBitField &bf) const // сравнение
 
 int TBitField::operator!=(const TBitField &bf) const // сравнение
 {
-  return 0;
+    // как operator==, но наоборот
+    if (BitLen == bf.BitLen)  // если равна длина в битах
+    {
+        if (MemLen == bf.MemLen) // если совпадает кол-во €чеек
+        {
+            for (int i = 0; i < MemLen - 2; i++) // провер€ем все €чейки, кроме последней (memlen - это количество, а не индекс)
+            {
+                if (pMem[i] != bf.pMem[i]) // если кака€-то €чейка не совпала
+                    return 1;
+            }
+
+            for (int i = BitLen - 1; i > BitLen - ((BitLen - 1) % (sizeof(TELEM)*8 * BitLen / (sizeof(TELEM)*8))) ; i--) // проходим по битам последнего элемента массива, начина€ со старшего
+            {
+                if (GetBit(i) != bf.GetBit(i)
+                    return 1;
+            }
+
+            return 0; // вернет 1 в том случае, если всЄ совпало
+
+        }
+    }
+    return 1; // если что-то не равно
 }
 
 TBitField TBitField::operator|(const TBitField &bf) // операци€ "или"
 {
+    if (BitLen >= bf.BitLen)     // создаем объект с наибольшей длиной
+        TBitField tmp(BitLen);
+    else
+        TBitField tmp(bf.BitLen);
+
+    for (int i = 0; i < tmp.BitLen; i++)
+    {
+        if (GetBit(i) || bf.GetBit(i))
+            tmp.SetBit(i);
+    }
+
+    return tmp;
 }
 
 TBitField TBitField::operator&(const TBitField &bf) // операци€ "и"
 {
+    if (BitLen >= bf.BitLen)     // создаем объект с наибольшей длиной
+        TBitField tmp(BitLen);
+    else
+        TBitField tmp(bf.BitLen);
+
+    for (int i = 0; i < tmp.BitLen; i++)
+    {
+        if (GetBit(i) && bf.GetBit(i))
+            tmp.SetBit(i);
+    }
+
+    return tmp;
 }
 
 TBitField TBitField::operator~(void) // отрицание
 {
+    for (int i = 0; i < BitLen; i++)
+    {
+        if (GetBit(i))
+            ClrBit(i);
+        else
+            SetBit(i);
+    }
 }
 
 // ввод/вывод
 
 istream &operator>>(istream &istr, TBitField &bf) // ввод
 {
+    int bit;
+
+    for (int i = 0; i < bf.BitLen; i++)
+    {
+        cin >> bit;
+        if (bit)
+            bf.SetBit(i);
+        else
+            bf.ClrBit(i);
+    }
+
+    return istr;
 }
 
 ostream &operator<<(ostream &ostr, const TBitField &bf) // вывод
 {
+    for (int i = 0; i < bf.BitLen; i++)
+    {
+        cout << bf.GetBit(i);
+    }
+    cout << endl;
+
+    return ostr;
 }

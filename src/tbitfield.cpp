@@ -61,11 +61,14 @@ void TBitField::SetBit(const int n) // установить бит
 
 void TBitField::ClrBit(const int n) // очистить бит
 {
+	int i = this->GetMemIndex(n);//index pMem
+	if (this->GetMemMask * this->pMem[i] != 0) this->pMem[i] -= this->GetMemMask; 
 }
 
 int TBitField::GetBit(const int n) const // получить значение бита
 {
-  return 0;
+	int i = this->GetMemIndex(n);//index pMem
+	return this->GetMemMask * this->pMem[i];
 }
 
 // битовые операции

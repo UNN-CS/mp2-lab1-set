@@ -56,7 +56,7 @@ int TBitField::GetLength(void) const // получить длину (к-во б�
 void TBitField::SetBit(const int n) // установить бит
 {
 	int i = this->GetMemIndex(n);//index pMem
-	this->pMem[i] += this->GetMemMask; 
+	if (this->GetMemMask * this->pMem[i] == 0) this->pMem[i] += this->GetMemMask; //а не включен ли уже бит?
 }
 
 void TBitField::ClrBit(const int n) // очистить бит

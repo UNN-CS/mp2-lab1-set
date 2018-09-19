@@ -7,16 +7,32 @@
 
 #include "tbitfield.h"
 
-TBitField::TBitField(int len)
+TBitField::TBitField(int len) //количество битов 
 {
+	BitLen = len;
+	(len % 8 == 0) ? MemLen = len / 8 : MemLen = len / 8 + 1; //set MemLen
+	pMem = new TELEM[MemLen];
 }
 
 TBitField::TBitField(const TBitField &bf) // конструктор копирования
 {
+	if (&bf != this)
+		{
+			delete[] pMem; //очистка исходного объекта
+			pMem = NULL;
+			BitLen = bf.BitLen; MemLen = bf.MemLen;
+			pMem = new TELEM[MemLen];// создать новый массив
+			for (int i = 0; i < MemLen; i++)
+			{
+				pMem[i] = *(bf.pMem + i);//копируем
+			}
+		}
 }
 
 TBitField::~TBitField()
 {
+	delete[] pMem;// освобождаем память массива
+	BitLen = MemLen = pMem = 0;
 }
 
 int TBitField::GetMemIndex(const int n) const // индекс Мем для бита n

@@ -5,7 +5,8 @@
 //
 // Битовое поле
 
-#include "tbitfield.h"
+#include "C:\Users\1\Documents\Visual Studio 2015\Projects\mp2-lab1-set\include\tbitfield.h"
+
 
 TBitField::TBitField(int len)   // предполагается, что len - это не индекс, а количество
 {
@@ -15,14 +16,18 @@ TBitField::TBitField(int len)   // предполагается, что len - это не индекс, а ко
     {
         MemLen++;
     }
-    TELEM * pMem = new TELEM[MemLen];
+    pMem = new TELEM[MemLen];
+	for (int i = 0; i < MemLen; i++)
+	{
+		pMem[i] = 0;
+	}
 }
 
 TBitField::TBitField(const TBitField &bf) // конструктор копирования
 {
     BitLen = bf.BitLen;
     MemLen = bf.MemLen;
-    TELEM * pMem = new TELEM[MemLen];
+    pMem = new TELEM[MemLen];
     for (int i = 0; i < MemLen; i++)  // копируем по одному элементы динамического массива
     {
         pMem[i] = bf.pMem[i];
@@ -32,6 +37,7 @@ TBitField::TBitField(const TBitField &bf) // конструктор копирования
 TBitField::~TBitField()
 {
     delete[] pMem;
+	pMem = NULL;
     BitLen = 0;
     MemLen = 0;
 }
@@ -47,6 +53,7 @@ TELEM TBitField::GetMemMask(const int n) const // битовая маска для бита n
     int number = n % (sizeof(TELEM)*8); // порядок бита в маске
     TELEM mask = 0;
     mask = 1 << number;
+	return mask;
 }
 
 // доступ к битам битового поля
@@ -61,7 +68,7 @@ void TBitField::SetBit(const int n) // установить бит
 {
     int memindex = GetMemIndex(n);
     int mask = GetMemMask(n);
-    TELEM[memindex] = TELEM[memindex] | mask;
+    pMem[memindex] = pMem[memindex] | mask;
 }
 
 void TBitField::ClrBit(const int n) // очистить бит
@@ -69,14 +76,14 @@ void TBitField::ClrBit(const int n) // очистить бит
     int memindex = GetMemIndex(n);
     int mask = GetMemMask(n);
     mask = ~mask;
-    TELEM[memindex] = TELEM[memindex] & mask;
+    pMem[memindex] = pMem[memindex] & mask;
 }
 
 int TBitField::GetBit(const int n) const // получить значение бита
 {
     int memindex = GetMemIndex(n);
     int mask = GetMemMask(n);
-    return TELEM[memindex] & mask;
+    return pMem[memindex] & mask;
   //return 0;
 }
 
@@ -88,7 +95,7 @@ TBitField& TBitField::operator=(const TBitField &bf) // присваивание
     {
         BitLen = bf.BitLen;
         MemLen = bf.MemLen;
-        TELEM * pMem = new TELEM[MemLen];
+        pMem = new TELEM[MemLen];
         for (int i = 0; i < MemLen; i++)  // копируем по одному элементы динамического массива
         {
             pMem[i] = bf.pMem[i];
@@ -112,7 +119,7 @@ int TBitField::operator==(const TBitField &bf) const // сравнение
 
             for (int i = BitLen - 1; i > BitLen - ((BitLen - 1) % (sizeof(TELEM)*8 * BitLen / (sizeof(TELEM)*8))) ; i--) // проходим по битам последнего элемента массива, начиная со старшего
             {
-                if (GetBit(i) != bf.GetBit(i)
+                if (GetBit(i) != bf.GetBit(i))
                     return 0;
             }
 
@@ -138,7 +145,7 @@ int TBitField::operator!=(const TBitField &bf) const // сравнение
 
             for (int i = BitLen - 1; i > BitLen - ((BitLen - 1) % (sizeof(TELEM)*8 * BitLen / (sizeof(TELEM)*8))) ; i--) // проходим по битам последнего элемента массива, начиная со старшего
             {
-                if (GetBit(i) != bf.GetBit(i)
+                if (GetBit(i) != bf.GetBit(i))
                     return 1;
             }
 
@@ -151,10 +158,14 @@ int TBitField::operator!=(const TBitField &bf) const // сравнение
 
 TBitField TBitField::operator|(const TBitField &bf) // операция "или"
 {
+    int max;
+
     if (BitLen >= bf.BitLen)     // создаем объект с наибольшей длиной
-        TBitField tmp(BitLen);
+        max = BitLen;
     else
-        TBitField tmp(bf.BitLen);
+        max = bf.BitLen;
+
+    TBitField tmp(max);
 
     for (int i = 0; i < tmp.BitLen; i++)
     {
@@ -167,10 +178,14 @@ TBitField TBitField::operator|(const TBitField &bf) // операция "или"
 
 TBitField TBitField::operator&(const TBitField &bf) // операция "и"
 {
+    int max;
+
     if (BitLen >= bf.BitLen)     // создаем объект с наибольшей длиной
-        TBitField tmp(BitLen);
+        max = BitLen;
     else
-        TBitField tmp(bf.BitLen);
+        max = bf.BitLen;
+
+    TBitField tmp(max);
 
     for (int i = 0; i < tmp.BitLen; i++)
     {
@@ -183,13 +198,16 @@ TBitField TBitField::operator&(const TBitField &bf) // операция "и"
 
 TBitField TBitField::operator~(void) // отрицание
 {
-    for (int i = 0; i < BitLen; i++)
+	TBitField tmp(*this);
+
+    for (int i = 0; i < tmp.BitLen; i++)
     {
         if (GetBit(i))
-            ClrBit(i);
+            tmp.ClrBit(i);
         else
-            SetBit(i);
+            tmp.SetBit(i);
     }
+	return tmp;
 }
 
 // ввод/вывод

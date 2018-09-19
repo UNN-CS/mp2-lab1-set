@@ -74,7 +74,18 @@ int TBitField::GetBit(const int n) const // получить значение б
 // битовые операции
 
 TBitField& TBitField::operator=(const TBitField &bf) // присваивание
-{
+{                                                           //К копир ?? чем отличается??
+	if (&bf != this) //////??? одинаковые длины заносить будем? ?????????????????????????????????????????
+	{
+		delete[] pMem; //очистка исходного объекта
+		pMem = NULL;
+		BitLen = bf.BitLen; MemLen = bf.MemLen;
+		pMem = new TELEM[MemLen];// создать новый массив
+		for (int i = 0; i < MemLen; i++)
+		{
+			pMem[i] = *(bf.pMem + i);//копируем
+		}
+	}
 }
 
 int TBitField::operator==(const TBitField &bf) const // сравнение

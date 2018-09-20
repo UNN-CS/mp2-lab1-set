@@ -53,11 +53,11 @@ TSet& TSet::operator=(const TSet &s) // присваивание
 {
 	if (this != &s) 
 	{
-		Bitfield = s.BitField;
+		BitField = s.BitField;
 		MaxPower = s.MaxPower;
 		return *this;
 	}
-	else return 0;
+	else throw;
 }
 
 int TSet::operator==(const TSet &s) const // сравнение
@@ -92,7 +92,7 @@ TSet TSet::operator-(const int Elem) // разность с элементом
 
 TSet TSet::operator*(const TSet &s) // пересечение
 {
-	TSet tmp(Bitfield & s.BitField);
+	TSet tmp(BitField & s.BitField);
 	return tmp;
 }
 

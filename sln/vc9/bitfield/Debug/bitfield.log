@@ -1,0 +1,20 @@
+﻿Build started 18.09.2018 18:23:19.
+     1>Project "D:\Проекты\mp2-lab1-set\sln\vc9\bitfield\bitfield.vcxproj" on node 3 (Build target(s)).
+     1>ClCompile:
+         D:\Visual Studio\VC\bin\CL.exe /c /I../../../include /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt ..\..\..\src\tbitfield.cpp ..\..\..\src\tset.cpp
+         tset.cpp
+         tbitfield.cpp
+     1>d:\проекты\mp2-lab1-set\src\tbitfield.cpp(32): warning C4101: 'error' : unreferenced local variable
+     1>d:\проекты\mp2-lab1-set\src\tbitfield.cpp(64): warning C4101: 'error' : unreferenced local variable
+     1>d:\проекты\mp2-lab1-set\src\tbitfield.cpp(81): warning C4101: 'error' : unreferenced local variable
+         Generating Code...
+     1>d:\проекты\mp2-lab1-set\src\tbitfield.cpp(172): warning C4715: 'TBitField::GetBit' : not all control paths return a value
+       Lib:
+         D:\Visual Studio\VC\bin\Lib.exe /OUT:"D:\Проекты\mp2-lab1-set\sln\vc9\Debug\bitfield.lib" /NOLOGO Debug\tbitfield.obj
+         Debug\tset.obj
+         bitfield.vcxproj -> D:\Проекты\mp2-lab1-set\sln\vc9\Debug\bitfield.lib
+     1>Done Building Project "D:\Проекты\mp2-lab1-set\sln\vc9\bitfield\bitfield.vcxproj" (Build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:02.20

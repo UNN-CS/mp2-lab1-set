@@ -1,0 +1,48 @@
+﻿Build started 18.09.2018 18:41:01.
+     1>Project "D:\Проекты\mp2-lab1-set\sln\vc10\test\test.vcxproj" on node 3 (Rebuild target(s)).
+     1>ClCompile:
+         D:\Visual Studio\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MTd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt ..\..\..\test\test_main.cpp ..\..\..\test\test_tbitfield.cpp
+         test_tbitfield.cpp
+         test_main.cpp
+         Generating Code...
+       Link:
+         D:\Visual Studio\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"D:\Проекты\mp2-lab1-set\sln\vc10\bitfield\Debug\test.exe" /INCREMENTAL /NOLOGO gtestd.lib bitfield.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:\Проекты\mp2-lab1-set\sln\vc10\bitfield\Debug\test.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:\Проекты\mp2-lab1-set\sln\vc10\bitfield\Debug\test.lib" /MACHINE:X86 Debug\test_main.obj
+         Debug\test_tbitfield.obj
+     1>bitfield.lib(tbitfield.obj) : error LNK2038: mismatch detected for 'RuntimeLibrary': value 'MDd_DynamicDebug' doesn't match value 'MTd_StaticDebug' in test_main.obj
+     1>msvcprtd.lib(MSVCP120D.dll) : error LNK2005: "bool __cdecl std::uncaught_exception(void)" (?uncaught_exception@std@@YA_NXZ) already defined in libcpmtd.lib(uncaught.obj)
+     1>msvcprtd.lib(MSVCP120D.dll) : error LNK2005: "void __cdecl std::_Debug_message(wchar_t const *,wchar_t const *,unsigned int)" (?_Debug_message@std@@YAXPB_W0I@Z) already defined in libcpmtd.lib(stdthrow.obj)
+     1>msvcprtd.lib(MSVCP120D.dll) : error LNK2005: "public: __thiscall std::_Container_base12::_Container_base12(void)" (??0_Container_base12@std@@QAE@XZ) already defined in test_main.obj
+     1>msvcprtd.lib(MSVCP120D.dll) : error LNK2005: "public: __thiscall std::_Container_base12::~_Container_base12(void)" (??1_Container_base12@std@@QAE@XZ) already defined in test_main.obj
+     1>msvcprtd.lib(MSVCP120D.dll) : error LNK2005: "public: void __thiscall std::_Container_base12::_Orphan_all(void)" (?_Orphan_all@_Container_base12@std@@QAEXXZ) already defined in test_main.obj
+     1>msvcprtd.lib(MSVCP120D.dll) : error LNK2005: "void __cdecl std::_Xbad_alloc(void)" (?_Xbad_alloc@std@@YAXXZ) already defined in libcpmtd.lib(xthrow.obj)
+     1>msvcprtd.lib(MSVCP120D.dll) : error LNK2005: "void __cdecl std::_Xlength_error(char const *)" (?_Xlength_error@std@@YAXPBD@Z) already defined in libcpmtd.lib(xthrow.obj)
+     1>msvcprtd.lib(MSVCP120D.dll) : error LNK2005: "void __cdecl std::_Xout_of_range(char const *)" (?_Xout_of_range@std@@YAXPBD@Z) already defined in libcpmtd.lib(xthrow.obj)
+     1>msvcprtd.lib(MSVCP120D.dll) : error LNK2005: "char const * __cdecl std::_Syserror_map(int)" (?_Syserror_map@std@@YAPBDH@Z) already defined in libcpmtd.lib(syserror.obj)
+     1>msvcprtd.lib(MSVCP120D.dll) : error LNK2005: "char const * __cdecl std::_Winerror_map(int)" (?_Winerror_map@std@@YAPBDH@Z) already defined in libcpmtd.lib(syserror.obj)
+     1>msvcprtd.lib(MSVCP120D.dll) : error LNK2005: "public: bool __thiscall std::ios_base::good(void)const " (?good@ios_base@std@@QBE_NXZ) already defined in test_tbitfield.obj
+     1>msvcprtd.lib(MSVCP120D.dll) : error LNK2005: "public: int __thiscall std::ios_base::flags(void)const " (?flags@ios_base@std@@QBEHXZ) already defined in test_tbitfield.obj
+     1>msvcprtd.lib(MSVCP120D.dll) : error LNK2005: "public: __int64 __thiscall std::ios_base::width(void)const " (?width@ios_base@std@@QBE_JXZ) already defined in test_tbitfield.obj
+     1>msvcprtd.lib(MSVCP120D.dll) : error LNK2005: "public: __int64 __thiscall std::ios_base::width(__int64)" (?width@ios_base@std@@QAE_J_J@Z) already defined in test_tbitfield.obj
+     1>msvcprtd.lib(MSVCP120D.dll) : error LNK2005: "public: int __thiscall std::basic_streambuf<char,struct std::char_traits<char> >::sputc(char)" (?sputc@?$basic_streambuf@DU?$char_traits@D@std@@@std@@QAEHD@Z) already defined in test_tbitfield.obj
+     1>msvcprtd.lib(MSVCP120D.dll) : error LNK2005: "public: __int64 __thiscall std::basic_streambuf<char,struct std::char_traits<char> >::sputn(char const *,__int64)" (?sputn@?$basic_streambuf@DU?$char_traits@D@std@@@std@@QAE_JPBD_J@Z) already defined in test_tbitfield.obj
+     1>msvcprtd.lib(MSVCP120D.dll) : error LNK2005: "public: void __thiscall std::basic_ios<char,struct std::char_traits<char> >::setstate(int,bool)" (?setstate@?$basic_ios@DU?$char_traits@D@std@@@std@@QAEXH_N@Z) already defined in test_tbitfield.obj
+     1>msvcprtd.lib(MSVCP120D.dll) : error LNK2005: "public: class std::basic_ostream<char,struct std::char_traits<char> > * __thiscall std::basic_ios<char,struct std::char_traits<char> >::tie(void)const " (?tie@?$basic_ios@DU?$char_traits@D@std@@@std@@QBEPAV?$basic_ostream@DU?$char_traits@D@std@@@2@XZ) already defined in test_tbitfield.obj
+     1>msvcprtd.lib(MSVCP120D.dll) : error LNK2005: "public: class std::basic_streambuf<char,struct std::char_traits<char> > * __thiscall std::basic_ios<char,struct std::char_traits<char> >::rdbuf(void)const " (?rdbuf@?$basic_ios@DU?$char_traits@D@std@@@std@@QBEPAV?$basic_streambuf@DU?$char_traits@D@std@@@2@XZ) already defined in test_tbitfield.obj
+     1>msvcprtd.lib(MSVCP120D.dll) : error LNK2005: "public: char __thiscall std::basic_ios<char,struct std::char_traits<char> >::fill(void)const " (?fill@?$basic_ios@DU?$char_traits@D@std@@@std@@QBEDXZ) already defined in test_tbitfield.obj
+     1>msvcprtd.lib(MSVCP120D.dll) : error LNK2005: "public: char __thiscall std::basic_ios<char,struct std::char_traits<char> >::widen(char)const " (?widen@?$basic_ios@DU?$char_traits@D@std@@@std@@QBEDD@Z) already defined in test_tbitfield.obj
+     1>msvcprtd.lib(MSVCP120D.dll) : error LNK2005: "public: void __thiscall std::basic_ostream<char,struct std::char_traits<char> >::_Osfx(void)" (?_Osfx@?$basic_ostream@DU?$char_traits@D@std@@@std@@QAEXXZ) already defined in test_tbitfield.obj
+     1>msvcprtd.lib(MSVCP120D.dll) : error LNK2005: "public: class std::basic_ostream<char,struct std::char_traits<char> > & __thiscall std::basic_ostream<char,struct std::char_traits<char> >::operator<<(class std::basic_ostream<char,struct std::char_traits<char> > & (__cdecl*)(class std::basic_ostream<char,struct std::char_traits<char> > &))" (??6?$basic_ostream@DU?$char_traits@D@std@@@std@@QAEAAV01@P6AAAV01@AAV01@@Z@Z) already defined in gtestd.lib(gtest-all.obj)
+     1>msvcprtd.lib(MSVCP120D.dll) : error LNK2005: "public: class std::basic_ostream<char,struct std::char_traits<char> > & __thiscall std::basic_ostream<char,struct std::char_traits<char> >::operator<<(int)" (??6?$basic_ostream@DU?$char_traits@D@std@@@std@@QAEAAV01@H@Z) already defined in test_tbitfield.obj
+     1>msvcprtd.lib(MSVCP120D.dll) : error LNK2005: "public: class std::basic_ostream<char,struct std::char_traits<char> > & __thiscall std::basic_ostream<char,struct std::char_traits<char> >::put(char)" (?put@?$basic_ostream@DU?$char_traits@D@std@@@std@@QAEAAV12@D@Z) already defined in gtestd.lib(gtest-all.obj)
+     1>msvcprtd.lib(MSVCP120D.dll) : error LNK2005: "public: class std::basic_ostream<char,struct std::char_traits<char> > & __thiscall std::basic_ostream<char,struct std::char_traits<char> >::flush(void)" (?flush@?$basic_ostream@DU?$char_traits@D@std@@@std@@QAEAAV12@XZ) already defined in test_tbitfield.obj
+     1>MSVCRTD.lib(MSVCR120D.dll) : error LNK2005: __hypot already defined in LIBCMTD.lib(hypot.obj)
+     1>MSVCRTD.lib(MSVCR120D.dll) : error LNK2005: _memmove already defined in LIBCMTD.lib(memmove.obj)
+     1>MSVCRTD.lib(ti_inst.obj) : error LNK2005: "private: __thiscall type_info::type_info(class type_info const &)" (??0type_info@@AAE@ABV0@@Z) already defined in LIBCMTD.lib(typinfo.obj)
+     1>MSVCRTD.lib(ti_inst.obj) : error LNK2005: "private: class type_info & __thiscall type_info::operator=(class type_info const &)" (??4type_info@@AAEAAV0@ABV0@@Z) already defined in LIBCMTD.lib(typinfo.obj)
+     1>LINK : warning LNK4098: defaultlib 'MSVCRTD' conflicts with use of other libs; use /NODEFAULTLIB:library
+     1>D:\Проекты\mp2-lab1-set\sln\vc10\bitfield\Debug\test.exe : fatal error LNK1169: one or more multiply defined symbols found
+     1>Done Building Project "D:\Проекты\mp2-lab1-set\sln\vc10\test\test.vcxproj" (Rebuild target(s)) -- FAILED.
+
+Build FAILED.
+
+Time Elapsed 00:00:03.35

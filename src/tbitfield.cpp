@@ -52,37 +52,14 @@ TBitField::~TBitField()
 
 int TBitField::GetMemIndex(const int n) const // индекс Мем для бита n
 {
-	try
-	{
-		if ((n >= 0) && (n < BitLen))
-		{
-			int temp = n / (sizeof(TELEM)* 8);  // находим в каком TELEM
-			return n - temp*(sizeof(TELEM)*8);  // находим индекс в найденном TELEM
-		}
-		else throw 2;
-	}
-	catch (int error)
-	{ 
-		cout << "incorrect data" << endl;
-		throw 2;
-	}
+	int temp = n / (sizeof(TELEM)* 8);  // находим в каком TELEM
+	return n - temp*(sizeof(TELEM)*8);  // находим индекс в найденном TELEM
+		
 }
 
 TELEM TBitField::GetMemMask(const int n) const // битовая маска для бита n
 {
-	try
-	{
-		if ((n >= 0) && (n < BitLen))
-		{
 			return 1 << (GetMemIndex(n) - 1);
-		}
-		else throw 2;
-	}
-	catch (int error)
-	{
-		cout << "incorrect data" << endl;
-		throw 2;
-	}
 }
 
 // доступ к битам битового поля
@@ -96,7 +73,7 @@ void TBitField::SetBit(const int n) // установить бит
 {
 	try
 	{
-		if (n <= 0) throw 1;
+		if (n < 0) throw 1;
 		if (n > BitLen) throw 3;
 
 		TELEM mask = GetMemMask(n);
@@ -123,7 +100,7 @@ void TBitField::ClrBit(const int n) // очистить бит
 {
 	try
 	{
-		if (n <= 0) throw 1;
+		if (n < 0) throw 1;
 		if (n > BitLen) throw 3;
 
 		TELEM mask = ~GetMemMask(n);
@@ -151,10 +128,13 @@ int TBitField::GetBit(const int n) const // получить значение б
 {
 	try
 	{
-		if (n <= 0) throw 1;
+		if (n < 0) throw 1;
 		if (n > BitLen) throw 3;
 
-		return pMem[GetMemIndex(n)] & GetMemMask(n);
+		int mask = GetMemMask(n);
+		int Mem = n / (sizeof(TELEM)* 8);
+		int index = GetMemIndex(n);
+		return ((pMem[Mem] & mask) >> (index - 1));
 	}
 	catch (int error)
 	{
@@ -229,10 +209,15 @@ TBitField TBitField::operator&(const TBitField &bf) // операция "и"
 
 TBitField TBitField::operator~(void) // отрицание
 {
-	TBitField result(BitLen);
-	for (int i = 0; i < MemLen; i++)
-		result.pMem[i] = ~pMem[i];
-	return result;
+	TBitField temp(*this);
+	for (int i = 0; i < BitLen; i++)
+	{
+		if (!GetBit(i))
+			temp.SetBit(i);
+		else
+			temp.ClrBit(i);
+	}
+	return temp;
 }
 
 // ввод/вывод

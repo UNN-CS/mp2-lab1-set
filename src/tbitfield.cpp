@@ -142,7 +142,17 @@ TBitField TBitField::operator&(const TBitField &bf) // операция "и"
 
 TBitField TBitField::operator~(void) // отрицание
 {
-	return TBitField(-1);
+	TBitField t(BitLen);
+
+	for (int i = 0; i < BitLen; ++i)
+	{
+		if (GetBit(i))
+			t.ClrBit(i);
+		else
+			t.SetBit(i);
+	}
+
+	return t;
 }
 
 // ввод/вывод

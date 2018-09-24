@@ -199,5 +199,22 @@ istream &operator>>(istream &istr, TSet &s) // ввод
 
 ostream& operator<<(ostream &ostr, const TSet &s) // вывод
 {
+	int i;
+
+	cout << "{ ";
+	for (i = 0; i < s.MaxPower; ++i)
+	{
+		if (s.IsMember(i))
+		{
+			cout << i;
+			++i;
+			break;
+		}
+	}
+	for (; i < s.MaxPower; ++i)
+		if (s.IsMember(i))
+			cout << ", " << i;
+	cout << " }";
+
 	return ostr;
 }

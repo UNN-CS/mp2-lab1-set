@@ -159,6 +159,28 @@ TBitField TBitField::operator~(void) // отрицание
 
 istream &operator>>(istream &istr, TBitField &bf) // ввод
 {
+	TBitField *res = new TBitField(bf);
+	int len = bf.GetLength() + 1;
+	char *input = new char[len];
+
+	istr.getline(input, len);
+
+	for (int i = len - 2, j = 0; i >= 0; --i, ++j)
+	{
+		if (input[i] == '0')
+			bf.ClrBit(j);
+		else if (input[i] == '1')
+			bf.SetBit(j);
+		else
+		{
+			bf = *res;
+			delete res;
+			throw("bad input");
+		}
+	}
+
+	delete res;
+
 	return istr;
 }
 

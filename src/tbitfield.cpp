@@ -21,10 +21,12 @@ TBitField::~TBitField()
 
 int TBitField::GetMemIndex(const int n) const // индекс Мем для бита n
 {
+	return 0;
 }
 
 TELEM TBitField::GetMemMask(const int n) const // битовая маска для бита n
 {
+	return 0;
 }
 
 // доступ к битам битового поля
@@ -51,6 +53,7 @@ int TBitField::GetBit(const int n) const // получить значение б
 
 TBitField& TBitField::operator=(const TBitField &bf) // присваивание
 {
+	return TBitField(-1);
 }
 
 int TBitField::operator==(const TBitField &bf) const // сравнение
@@ -65,22 +68,27 @@ int TBitField::operator!=(const TBitField &bf) const // сравнение
 
 TBitField TBitField::operator|(const TBitField &bf) // операция "или"
 {
+	return TBitField(-1);
 }
 
 TBitField TBitField::operator&(const TBitField &bf) // операция "и"
 {
+	return TBitField(-1);
 }
 
 TBitField TBitField::operator~(void) // отрицание
 {
+	return TBitField(-1);
 }
 
 // ввод/вывод
 
 istream &operator>>(istream &istr, TBitField &bf) // ввод
 {
+	return istr;
 }
 
 ostream &operator<<(ostream &ostr, const TBitField &bf) // вывод
 {
+	return ostr;
 }

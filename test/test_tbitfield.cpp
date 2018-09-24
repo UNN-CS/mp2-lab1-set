@@ -2,6 +2,31 @@
 
 #include <gtest.h>
 
+TEST(TBitField, multiple_and_operator)
+{
+	const int size = 17;
+	TBitField bf1(size), bf2(size), bf3(size);
+	TBitField res(size);
+	
+	bf1.SetBit(8);
+	bf1.SetBit(1);
+	bf2.SetBit(3);
+	bf2.SetBit(16);
+	bf2.SetBit(14);
+	bf2.SetBit(0);
+	bf3.SetBit(7);
+	bf3.SetBit(7);
+	res.SetBit(0);
+	res.SetBit(1);
+	res.SetBit(3);
+	res.SetBit(7);
+	res.SetBit(8);
+	res.SetBit(14);
+	res.SetBit(16);
+
+	ASSERT_EQ(res, bf1 | bf2 | bf3);
+}
+
 TEST(TBitField, can_create_bitfield_with_positive_length)
 {
   ASSERT_NO_THROW(TBitField bf(3));

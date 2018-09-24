@@ -64,7 +64,7 @@ void TBitField::ClrBit(const int n) // очистить бит
 
 int TBitField::GetBit(const int n) const // получить значение бита
 {
-  return 0;
+	return ((pMem[GetMemIndex(n)] & GetMemMask(n)) == 0) ? 0 : 1;
 }
 
 // битовые операции

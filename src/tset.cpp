@@ -7,8 +7,12 @@
 
 #include "tset.h"
 
-TSet::TSet(int mp) : BitField(-1)
+TSet::TSet(int mp) : BitField(mp)
 {
+	if (mp <= 0)
+		throw("creating set with 0 or less length");
+
+	MaxPower = mp;
 }
 
 // конструктор копирования
@@ -17,7 +21,7 @@ TSet::TSet(const TSet &s) : BitField(-1)
 }
 
 // конструктор преобразования типа
-TSet::TSet(const TBitField &bf) : BitField(-1)
+TSet::TSet(const TBitField &bf) : BitField(bf)
 {
 }
 

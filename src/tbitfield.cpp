@@ -110,7 +110,18 @@ int TBitField::operator!=(const TBitField &bf) const // сравнение
 
 TBitField TBitField::operator|(const TBitField &bf) // операция "или"
 {
-	return TBitField(-1);
+	int minlen = (BitLen < bf.BitLen) ? BitLen : bf.BitLen;
+	TBitField t((BitLen > bf.BitLen) ? *this : bf);
+
+	for (int i = 0; i < minlen; ++i)
+	{
+		if (GetBit(i) || bf.GetBit(i))
+			t.SetBit(i);
+		else
+			t.ClrBit(i);
+	}
+
+	return t;
 }
 
 TBitField TBitField::operator&(const TBitField &bf) // операция "и"

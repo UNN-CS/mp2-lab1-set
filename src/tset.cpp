@@ -95,8 +95,14 @@ TSet TSet::operator+(const TSet &s) // объединение
 
 TSet TSet::operator+(const int Elem) // объединение с элементом
 {
+	if (Elem < 0 || Elem >= MaxPower)
+		throw("bad element");
 
-	return TSet(-1);
+	TSet t(*this);
+
+	t.InsElem(Elem);
+
+	return t;
 }
 
 TSet TSet::operator-(const int Elem) // разность с элементом

@@ -2,6 +2,24 @@
 
 #include <gtest.h>
 
+TEST(TSet, multiple_intersection_operator)
+{
+	const int size = 9;
+	TSet s1(size), s2(size), s3(size);
+	TSet res(size);
+
+	s1.InsElem(0);
+	s1.InsElem(8);
+	s2.InsElem(8);
+	s3.InsElem(2);
+	s3.InsElem(4);
+	s3.InsElem(8);
+	s3.InsElem(3);
+	res.InsElem(8);
+
+	ASSERT_EQ(res, s1 * s2 * s3);
+}
+
 TEST(TSet, can_get_max_power_set)
 {
   const int size = 5;

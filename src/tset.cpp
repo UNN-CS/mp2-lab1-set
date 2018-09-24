@@ -6,6 +6,11 @@
 // Множество - реализация через битовые поля
 
 #include "tset.h"
+#include <iostream>
+#include <cmath>
+#include <string>
+#include <algorithm>
+using namespace std;
 
 TSet::TSet(int mp) : BitField(mp)
 {
@@ -53,8 +58,11 @@ void TSet::DelElem(const int Elem) // исключение элемента мн
 
 TSet& TSet::operator=(const TSet &s) // присваивание
 {
-    MaxPower = s.MaxPower;
-    BitField = s.BitField;
+	if (this != &s)
+	{
+		MaxPower = s.MaxPower;
+		BitField = s.BitField;
+	}
     return *this;
 }
 

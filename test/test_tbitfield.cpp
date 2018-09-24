@@ -2,7 +2,7 @@
 
 #include <gtest.h>
 
-TEST(TBitField, multiple_and_operator)
+TEST(TBitField, multiple_or_operator)
 {
 	const int size = 17;
 	TBitField bf1(size), bf2(size), bf3(size);

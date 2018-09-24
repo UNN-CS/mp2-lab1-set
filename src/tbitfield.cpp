@@ -89,12 +89,23 @@ TBitField& TBitField::operator=(const TBitField &bf) // присваивание
 
 int TBitField::operator==(const TBitField &bf) const // сравнение
 {
-  return 0;
+	if (BitLen != bf.BitLen)
+		return 0;
+
+	for (int i = 0; i < MemLen - 1; ++i)
+		if (pMem[i] != bf.pMem[i])
+			return 0;
+
+	for (int i = (MemLen - 1) * sizeof(TELEM) * 8; i < BitLen; ++i)
+		if (GetBit(i) != bf.GetBit(i))
+			return 0;
+
+	return 1;
 }
 
 int TBitField::operator!=(const TBitField &bf) const // сравнение
 {
-  return 0;
+	return 0;
 }
 
 TBitField TBitField::operator|(const TBitField &bf) // операция "или"

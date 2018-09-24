@@ -129,8 +129,71 @@ TSet TSet::operator~(void) // дополнение
 
 // перегрузка ввода/вывода
 
+int _atoi(char *str) {
+	if (*str == 0)
+		throw("empty string");
+	char *p = str;
+	int r = 0;
+	int e = 1;
+	while (*(++p));
+	while (p != str)
+	{
+		--p;
+		if ((*p < '0' || *p > '9') && *p != '-')
+			throw("bad string");
+		else if (*p == '-')
+			return -r;
+		else
+		{
+			r += (*p - '0') * e;
+			e *= 10;
+		}
+	}
+	return r;
+}
+
 istream &operator>>(istream &istr, TSet &s) // ввод
 {
+	TSet res(s);
+	char input[1024];
+	char tmp[16] = { 0 };
+	int i = 0;
+	char *p = input;
+
+	cin.getline(input, 1024);
+
+	while (*p != 0)
+	{
+		while ((*p >= '0' && *p <= '9') || *p == '-')
+		{
+			tmp[i] = *p;
+			++i;
+			++p;
+		}
+
+		if (tmp[0] != 0)
+		{
+			int el;
+			try
+			{
+				el = _atoi(tmp);
+			}
+			catch (...)
+			{
+				s = res;
+				throw("bad input");
+			}
+
+			s.InsElem(el);
+
+			for (int j = 0; j < 16; ++j)
+				tmp[j] = 0;
+			i = 0;
+		}
+
+		++p;
+	}
+
 	return istr;
 }
 

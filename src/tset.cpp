@@ -107,7 +107,14 @@ TSet TSet::operator+(const int Elem) // объединение с элемент
 
 TSet TSet::operator-(const int Elem) // разность с элементом
 {
-	return TSet(-1);
+	if (Elem < 0 || Elem >= MaxPower)
+		throw("bad element");
+
+	TSet t(*this);
+
+	t.DelElem(Elem);
+
+	return t;
 }
 
 TSet TSet::operator*(const TSet &s) // пересечение

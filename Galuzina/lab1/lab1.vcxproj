@@ -41,9 +41,9 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>D:\Проекты\mp2-lab1-set\include;D:\Проекты\googletest-master\googletest\include;$(IncludePath)</IncludePath>
-    <LibraryPath>D:\Проекты\mp2-lab1-set\sln\vc10\bitfield\Debug;D:\Проекты\googletest-master\googletest\msvc\2010\gtest\Win32-Debug;$(LibraryPath)</LibraryPath>
-    <SourcePath>D:\Проекты\mp2-lab1-set\src;$(SourcePath)</SourcePath>
+    <IncludePath>\googletest-master\googletest\include;..\..\include;$(IncludePath)</IncludePath>
+    <LibraryPath>..\..\sln\vc10\bitfield\Debug;\googletest-master\googletest\msvc\2010\gtest\Win32-Debug;$(LibraryPath)</LibraryPath>
+    <SourcePath>..\..\src;$(SourcePath)</SourcePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -83,12 +83,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="D:\Проекты\mp2-lab1-set\include\tbitfield.h" />
-    <ClInclude Include="D:\Проекты\mp2-lab1-set\include\tset.h" />
+    <ClInclude Include="..\..\include\tbitfield.h" />
+    <ClInclude Include="..\..\include\tset.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="D:\Проекты\mp2-lab1-set\src\tbitfield.cpp" />
-    <ClCompile Include="D:\Проекты\mp2-lab1-set\src\tset.cpp" />
+    <ClCompile Include="..\..\src\tbitfield.cpp" />
+    <ClCompile Include="..\..\src\tset.cpp" />
     <ClCompile Include="Source.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -15,21 +15,21 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="D:\Проекты\mp2-lab1-set\include\tbitfield.h">
+    <ClInclude Include="..\..\include\tbitfield.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="D:\Проекты\mp2-lab1-set\include\tset.h">
+    <ClInclude Include="..\..\include\tset.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="D:\Проекты\mp2-lab1-set\src\tbitfield.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="D:\Проекты\mp2-lab1-set\src\tset.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\tbitfield.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

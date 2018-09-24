@@ -1,15 +1,15 @@
-﻿Build started 22.09.2018 10:22:04.
-     1>Project "C:\Users\ehehe\OneDrive\Документы\Visual Studio 2013\Projects\lab1\lab1\lab1.vcxproj" on node 2 (Build target(s)).
+﻿Сборка начата 24.09.2018 17:14:31.
+     1>Проект "C:\Проекты\mp2-lab1-set\Galuzina\lab1\lab1.vcxproj" в узле 2 (целевые объекты Build).
      1>ClCompile:
-         D:\Visual Studio\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MTd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Source.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MTd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Source.cpp
          Source.cpp
        Link:
-         D:\Visual Studio\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\ehehe\OneDrive\Документы\Visual Studio 2013\Projects\lab1\Debug\lab1.exe" /INCREMENTAL /NOLOGO gtestd.lib bitfield.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\ehehe\OneDrive\Документы\Visual Studio 2013\Projects\lab1\Debug\lab1.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\ehehe\OneDrive\Документы\Visual Studio 2013\Projects\lab1\Debug\lab1.lib" /MACHINE:X86 Debug\tbitfield.obj
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Проекты\mp2-lab1-set\Galuzina\Debug\lab1.exe" /INCREMENTAL /NOLOGO gtestd.lib bitfield.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Проекты\mp2-lab1-set\Galuzina\Debug\lab1.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Проекты\mp2-lab1-set\Galuzina\Debug\lab1.lib" /MACHINE:X86 Debug\tbitfield.obj
          Debug\tset.obj
          Debug\Source.obj
-         lab1.vcxproj -> C:\Users\ehehe\OneDrive\Документы\Visual Studio 2013\Projects\lab1\Debug\lab1.exe
-     1>Done Building Project "C:\Users\ehehe\OneDrive\Документы\Visual Studio 2013\Projects\lab1\lab1\lab1.vcxproj" (Build target(s)).
+         lab1.vcxproj -> C:\Проекты\mp2-lab1-set\Galuzina\Debug\lab1.exe
+     1>Сборка проекта "C:\Проекты\mp2-lab1-set\Galuzina\lab1\lab1.vcxproj" завершена (целевые объекты Build).
 
-Build succeeded.
+Сборка успешно завершена.
 
-Time Elapsed 00:00:03.57
+Затраченное время: 00:00:10.15

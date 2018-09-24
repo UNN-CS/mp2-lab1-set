@@ -124,7 +124,7 @@ TSet TSet::operator*(const TSet &s) // пересечение
 
 TSet TSet::operator~(void) // дополнение
 {
-	return TSet(-1);
+	return TSet(~BitField);
 }
 
 // перегрузка ввода/вывода

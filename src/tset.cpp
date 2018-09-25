@@ -83,7 +83,6 @@ int TSet::operator!=(const TSet &s) const // сравнение
 	}
 	return n;
 
-	//	return !operator==(s);
 }
 
 TSet TSet::operator+(const TSet &s) // объединение

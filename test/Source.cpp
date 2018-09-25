@@ -1,10 +1,10 @@
-#include <gtest/gtest.h>
+#include <gtest.h>
 #include <stdio.h>
 
 #include "tbitfield.h"
 #include "tset.h"
 
-#include <gtest/gtest.h>
+#include <gtest.h>
 
 TEST(TSet, can_get_max_power_set)
 {

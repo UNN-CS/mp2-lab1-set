@@ -182,35 +182,15 @@ TBitField TBitField::operator | (const TBitField &bf) // операция "ил�
 
 TBitField TBitField::operator & (const TBitField &bf) // операция "и"
 {
-	if (bf.MemLen == 0)
-		throw new length_error("Unxcpected bit field length");
-	else
-	{
-		if (BitLen >= bf.BitLen)
-		{
-			TBitField tempBF(BitLen);
-
-			int j = bf.MemLen - 1;
-			for (int i = MemLen - 1; i >= bf.MemLen - 1; i--, j--)
-				tempBF.pMem[i] = bf.pMem[j];
-			for (int i = MemLen - 1; i >= 0; i--)
-				tempBF.pMem[i] &= pMem[i];
-
-			return tempBF;
-		}
-		else
-		{
-			TBitField tempBF(BitLen);
-
-			int j = MemLen - 1;
-			for (int i = bf.MemLen - 1; i >= MemLen - 1; i--, j--)
-				tempBF.pMem[i] = pMem[j];
-			for (int i = MemLen - 1; i >= 0; i--)
-				tempBF.pMem[i] &= bf.pMem[i];
-
-			return tempBF;
-		}
-	}
+	int len = BitLen;
+	if (bf.BitLen > len)
+		len = bf.BitLen;
+	TBitField temp(len);
+	for (int i = 0; i < MemLen; i++)
+		temp.pMem[i] = pMem[i];
+	for (int i = 0; i < bf.MemLen; i++)
+		temp.pMem[i] &= bf.pMem[i];
+	return temp;
 }
 
 TBitField TBitField::operator~ (void) // отрицание

@@ -46,7 +46,7 @@ TBitField::~TBitField()
 int TBitField::GetMemIndex(const int n) const // индекс Мем для бита n
 {
 	if (n < 0 || n > BitLen)
-		throw new out_of_range("Unexpected bit index");
+		throw "Unexpected bit index";
 	else if (n != 0)
 		return MemLen - ceil(static_cast<double>(n) / (sizeof(TELEM) * 8));
 	else
@@ -56,7 +56,7 @@ int TBitField::GetMemIndex(const int n) const // индекс Мем для би
 TELEM TBitField::GetMemMask(const int n) const // битовая маска для бита n
 {
 	if (n < 0 || n > BitLen)
-		throw new out_of_range("Unexpected bit index");
+		throw "Unexpected bit index";
 	else
 		return 1 << n;
 }
@@ -71,7 +71,7 @@ int TBitField::GetLength(void) const // получить длину (к-во б�
 void TBitField::SetBit(const int n) // установить бит
 {
 	if (n < 0 || n > BitLen)
-		throw new out_of_range("Unexpected bit index");
+		throw "Unexpected bit index";
 	else if (GetBit(n) != 1)
 		pMem[GetMemIndex(n)] |= GetMemMask(n);
 }
@@ -79,7 +79,7 @@ void TBitField::SetBit(const int n) // установить бит
 void TBitField::ClrBit(const int n) // очистить бит
 {
 	if (n < 0 || n > BitLen)
-		throw new out_of_range("Unexpected bit index");
+		throw "Unexpected bit index";
 	else if (GetBit(n) != 0)
 		pMem[GetMemIndex(n)] ^= GetMemMask(n);
 }
@@ -87,7 +87,7 @@ void TBitField::ClrBit(const int n) // очистить бит
 int TBitField::GetBit(const int n) const // получить значение бита
 {
 	if (n < 0 || n > BitLen)
-		throw new out_of_range("Unexpected bit index");
+		throw "Unexpected bit index";
 	else
 		return (pMem[GetMemIndex(n)] & GetMemMask(n)) != 0 ? 1 : 0;
 }
@@ -97,7 +97,7 @@ int TBitField::GetBit(const int n) const // получить значение б
 TBitField& TBitField::operator = (const TBitField &bf) // присваивание
 {
 	if (bf.MemLen == 0)
-		throw new length_error("Unxcpected bit field length");
+		throw "Unxcpected bit field length";
 	else
 	{
 		BitLen = bf.BitLen;
@@ -116,7 +116,7 @@ TBitField& TBitField::operator = (const TBitField &bf) // присваивани
 int TBitField::operator == (const TBitField &bf) const // сравнение
 {
 	if (bf.MemLen == 0)
-		throw new length_error("Unxcpected bit field length");
+		throw "Unxcpected bit field length";
 	else
 	{
 		bool check = 1;
@@ -151,7 +151,7 @@ int TBitField::operator != (const TBitField &bf) const // сравнение
 TBitField TBitField::operator | (const TBitField &bf) // операция "или"
 {
 	if (bf.MemLen == 0)
-		throw new length_error("Unxcpected bit field length");
+		throw "Unxcpected bit field length";
 	else
 	{
 		if (BitLen >= bf.BitLen)
@@ -230,7 +230,7 @@ istream &operator >> (istream &istr, TBitField &bf) // ввод
 		else if (bit == 1)
 			tempBF.SetBit(i);
 		else
-			throw new out_of_range("Unxepected bit value");
+			throw "Unxepected bit value";
 	}
 
 	bf = tempBF;

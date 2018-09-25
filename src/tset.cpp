@@ -96,15 +96,6 @@ TSet TSet::operator+(const TSet &s) // объединение
 
 TSet TSet::operator+(const int Elem) // объединение с элементом
 {
-	/*	if (Elem>MaxPower)
-		{
-			TSet tmp(Elem);
-			tmp.BitField.SetBit(Elem);
-		return tmp;
-		}
-		else
-			TSet tmp(MaxPower);
-	*/
 	TSet tmp(*this);
 	tmp.BitField.SetBit(Elem);
 	return tmp;

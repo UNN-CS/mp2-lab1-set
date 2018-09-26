@@ -8,7 +8,7 @@
 #include <iomanip>
 #include <locale.h>
 //#include <Windows.h>
-// #define USE_SET // Использовать класс TSet,
+ #define USE_SET // Использовать класс TSet,
                 // закоментировать, чтобы использовать битовое поле
 
 #ifndef USE_SET // Использовать класс TBitField
@@ -56,7 +56,7 @@ int main()
 }
 #else
 
-#include "tset.h"
+#include "C:\Users\1\Documents\Visual Studio 2015\Projects\mp2-lab1-set\include\tset.h"
 
 int main()
 {
@@ -93,6 +93,7 @@ int main()
     }
   cout << endl;
   cout << "В первых " << n << " числах " << count << " простых" << endl;
+  system("pause");
 }
 
 #endif

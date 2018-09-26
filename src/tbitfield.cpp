@@ -23,6 +23,13 @@ TBitField::TBitField(int len)   // предполагается, что len - это не индекс, а ко
 	}
 }
 
+TBitField::TBitField() // конструктор по умолчанию
+{
+	BitLen = 0;
+	MemLen = 0;
+	pMem = NULL;
+}
+
 TBitField::TBitField(const TBitField &bf) // конструктор копирования
 {
     BitLen = bf.BitLen;

@@ -26,6 +26,7 @@ private:
   TELEM GetMemMask (const int n) const; // битовая маска для бита n       (#О3)
 public:
   TBitField(int len);                //                                   (#О1)
+  TBitField();
   TBitField(const TBitField &bf);    //                                   (#П1)
   ~TBitField();                      //                                    (#С)
 

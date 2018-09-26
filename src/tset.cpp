@@ -92,12 +92,20 @@ int TSet::operator!=(const TSet &s) const // сравнение
 
 TSet TSet::operator+(const TSet &s) // объединение
 {
+	int max;
+	if (MaxPower >= s.MaxPower)     // ищем наибольшую длину
+		max = MaxPower;
+	else
+		max = s.MaxPower;
+
 	TSet tmp(BitField | s.BitField);
+	tmp.MaxPower = max;
 	return tmp;
 }
 
 TSet TSet::operator+(const int Elem) // объединение с элементом
 {
+	if (Elem > MaxPower) throw "out_of_range";
 	this->InsElem(Elem);
 	return *this;
 }
@@ -110,7 +118,14 @@ TSet TSet::operator-(const int Elem) // разность с элементом
 
 TSet TSet::operator*(const TSet &s) // пересечение
 {
+	int max;
+	if (MaxPower >= s.MaxPower)     // ищем наибольшую длину
+		max = MaxPower;
+	else
+		max = s.MaxPower;
+
 	TSet tmp(BitField & s.BitField);
+	tmp.MaxPower = max;
 	return tmp;
 }
 

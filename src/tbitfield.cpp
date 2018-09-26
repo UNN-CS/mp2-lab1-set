@@ -10,6 +10,7 @@
 
 TBitField::TBitField(int len)   // предполагается, что len - это не индекс, а количество
 {
+	if (len < 0) throw "negative length";
     BitLen = len;
     MemLen = ((len)/((sizeof(TELEM))*8));  // для ровно 32 бит (и кратных чисел) длина массива - 1.
     if ((len)%((sizeof(TELEM))*8) > 0)  // если количество больше или меньше чисел, кратных 32, то добавляем ещё ячейку.
@@ -73,6 +74,8 @@ int TBitField::GetLength(void) const // получить длину (к-во битов)
 
 void TBitField::SetBit(const int n) // установить бит
 {
+	if (n < 0) throw "negative index";
+	if (n > BitLen) throw "too large index";
     int memindex = GetMemIndex(n);
     int mask = GetMemMask(n);
     pMem[memindex] = pMem[memindex] | mask;
@@ -80,6 +83,8 @@ void TBitField::SetBit(const int n) // установить бит
 
 void TBitField::ClrBit(const int n) // очистить бит
 {
+	if (n < 0) throw "negative index";
+	if (n > BitLen) throw "too large index";
     int memindex = GetMemIndex(n);
     int mask = GetMemMask(n);
     mask = ~mask;
@@ -88,6 +93,8 @@ void TBitField::ClrBit(const int n) // очистить бит
 
 int TBitField::GetBit(const int n) const // получить значение бита
 {
+	if (n < 0) throw "negative index";
+	if (n > BitLen) throw "too large index";
     int memindex = GetMemIndex(n);
     int mask = GetMemMask(n);
     return pMem[memindex] & mask;
@@ -173,12 +180,20 @@ TBitField TBitField::operator|(const TBitField &bf) // операция "или"
         max = bf.BitLen;
 
     TBitField tmp(max);
+	tmp.BitLen = max;
 
-    for (int i = 0; i < tmp.BitLen; i++)
+    for (int i = 0; i < MemLen; i++)
     {
-        if (GetBit(i) || bf.GetBit(i))
-            tmp.SetBit(i);
+       // if (GetBit(i) || bf.GetBit(i))
+       //     tmp.SetBit(i);
+
+		tmp.pMem[i] = pMem[i];
     }
+
+	for (int i = 0; i < bf.MemLen; i++)
+	{
+		tmp.pMem[i] |= bf.pMem[i];
+	}
 
     return tmp;
 }
@@ -193,12 +208,19 @@ TBitField TBitField::operator&(const TBitField &bf) // операция "и"
         max = bf.BitLen;
 
     TBitField tmp(max);
+	tmp.BitLen = max;
 
-    for (int i = 0; i < tmp.BitLen; i++)
+    for (int i = 0; i < MemLen; i++)
     {
-        if (GetBit(i) && bf.GetBit(i))
-            tmp.SetBit(i);
+       // if (GetBit(i) && bf.GetBit(i))
+       //     tmp.SetBit(i);
+		tmp.pMem[i] = pMem[i];
     }
+
+	for (int i = 0; i < bf.MemLen; i++)
+	{
+		tmp.pMem[i] &= bf.pMem[i];
+	}
 
     return tmp;
 }

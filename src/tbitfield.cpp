@@ -5,7 +5,7 @@
 //
 // Битовое поле
 
-#include "C:\Users\1\Documents\Visual Studio 2015\Projects\mp2-lab1-set\include\tbitfield.h"
+#include "tbitfield.h"
 
 
 TBitField::TBitField(int len)   // предполагается, что len - это не индекс, а количество

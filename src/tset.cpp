@@ -5,7 +5,7 @@
 //
 // Множество - реализация через битовые поля
 
-#include "C:\Users\1\Documents\Visual Studio 2015\Projects\mp2-lab1-set\include\tset.h"
+#include "tset.h"
 
 TSet::TSet(int mp)
 {

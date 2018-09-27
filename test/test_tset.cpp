@@ -295,3 +295,10 @@ TEST(TSet, check_negation_operator)
 
   EXPECT_EQ(expSet, set1);
 }
+
+TEST(TSet, checking_of_operator_not_equal)
+{
+	TSet set(5);
+
+	EXPECT_EQ(0, set != set); // множество всегда равно самому себе
+}

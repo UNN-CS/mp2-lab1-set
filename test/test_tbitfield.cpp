@@ -309,3 +309,8 @@ TEST(TBitField, bitfields_with_different_bits_are_not_equal)
 
   EXPECT_NE(bf1, bf2);
 }
+
+TEST(TBitField, is_it_possible_to_create_an_empty_bitfield) // есть ли конструктор по умолчанию
+{
+	ASSERT_NO_THROW(TBitField bf);  
+}

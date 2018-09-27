@@ -6,19 +6,22 @@
 // Тестирование битового поля и множества
 
 #include <iomanip>
-
-// #define USE_SET // Использовать класс TSet,
+#include <locale.h>
+//#include <Windows.h>
+ #define USE_SET // Использовать класс TSet,
                 // закоментировать, чтобы использовать битовое поле
 
 #ifndef USE_SET // Использовать класс TBitField
 
-#include "tbitfield.h"
+#include "C:\Users\1\Documents\Visual Studio 2015\Projects\mp2-lab1-set\include\tbitfield.h"
 
 int main()
 {
   int n, m, k, count;
 
   setlocale(LC_ALL, "Russian");
+    //SetConsoleCP(1251);
+    //SetConsoleOutputCP(1251);
   cout << "Тестирование программ поддержки битового поля" << endl;
   cout << "             Решето Эратосфена" << endl;
   cout << "Введите верхнюю границу целых значений - ";
@@ -49,10 +52,11 @@ int main()
     }
   cout << endl;
   cout << "В первых " << n << " числах " << count << " простых" << endl;
+  system("pause");
 }
 #else
 
-#include "tset.h"
+#include "C:\Users\1\Documents\Visual Studio 2015\Projects\mp2-lab1-set\include\tset.h"
 
 int main()
 {
@@ -89,6 +93,7 @@ int main()
     }
   cout << endl;
   cout << "В первых " << n << " числах " << count << " простых" << endl;
+  system("pause");
 }
 
 #endif

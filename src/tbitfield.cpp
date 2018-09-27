@@ -38,9 +38,7 @@ TBitField::~TBitField()
 
 int TBitField::GetMemIndex(const int n) const // индекс Мем для бита n
 {
-    int Mem = n div (8 * sizeof(TELEM));
-    if (n % (8 * sizeof(TELEM)) <> 0)
-        Mem++;
+    int Mem = n / (8 * sizeof(TELEM));
     return Mem;
 }
 
@@ -58,17 +56,24 @@ int TBitField::GetLength(void) const // получить длину (к-во б�
 
 void TBitField::SetBit(const int n) // установить бит
 {
-
+    if (n < BitLen)
+        pMem[GetMemIndex(n)] |=  GetMemMask(n);
 }
 
 void TBitField::ClrBit(const int n) // очистить бит
 {
-
+    if (n < BitLen)
+        pMem[GetMemIndex(n)] &=  ~GetMemMask(n);
 }
 
 int TBitField::GetBit(const int n) const // получить значение бита
 {
-  return 0;
+    if (n < BitLen)
+    {
+        TELEM result = pMem[GetMemIndex(n)] & GetMemMask(n);
+        if (result != 0) return 1;
+        else return 0;
+    }
 }
 
 // битовые операции
@@ -109,17 +114,60 @@ int TBitField::operator!=(const TBitField &bf) const // сравнение
 
 TBitField TBitField::operator|(const TBitField &bf) // операция "или"
 {
-
+    int Mem, Bit, MinMem;
+    TELEM *p = NULL;
+    if (BitLen > bf.BitLen)
+    {
+        Mem = MemLen;
+        Bit = BitLen;
+        MinMem = bf.MemLen;
+        p = pMem;
+    }
+    else
+    {
+        Mem = bf.MemLen;
+        Bit = bf.BitLen;
+        MinMem = MemLen;
+        p = bf.pMem;
+    }
+    TBitField tmp(Bit);
+    for (int i = 0; i < MinMem; i++)
+    {
+        tmp.pMem[i] = pMem[i] | bf.pMem[i];
+    }
+    for (int i = MinMem; i < Mem; i++)
+    {
+        tmp.pMem[i] = p[i]
+    }
+    p = NULL;
+    return tmp;
 }
 
 TBitField TBitField::operator&(const TBitField &bf) // операция "и"
 {
-
+    int MinBit;
+    if (BitLen > bf.BitLen)
+    {
+        MinBit = bf.BitLen;
+    }
+    else
+    {
+        MinBit = BitLen;
+    }
+    TBitField tmp(MinBit);
+    for (int i = 0; i < tmp.MemLen; i++)
+    {
+        tmp.pMem[i] = bf.pMem[i] & pMem[i];
+    }
+    return tmp;
 }
 
 TBitField TBitField::operator~(void) // отрицание
 {
-
+    TBitField tmp(* this);
+    for (int i = 0; i < MemLen; i++)
+        tmp.pMem[i] = ~tmp.pMem[i];
+    return tmp;
 }
 
 // ввод/вывод

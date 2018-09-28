@@ -2,6 +2,25 @@
 
 #include <gtest.h>
 
+
+
+TEST (TBitField, equal_of_invertbitfield_and_notinvert)
+{
+	TBitField bf1(3);
+	TBitField bf2(3);
+        bf1.SetBit(0);bf1.SetBit(2);
+        bf2.SetBit(1);
+	EXPECT_EQ(1,(~bf1)==bf2);
+
+}
+
+TEST (TBitField, equal_of_bitfield)
+{
+	TBitField bf1(3);
+	TBitField bf2(5);
+	EXPECT_EQ(0,bf1==bf2);
+}
+
 TEST(TBitField, can_create_bitfield_with_positive_length)
 {
   ASSERT_NO_THROW(TBitField bf(3));

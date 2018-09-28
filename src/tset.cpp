@@ -1,88 +1,116 @@
-// ÐÐÐ“Ð£, Ð’ÐœÐš, ÐšÑƒÑ€Ñ "ÐœÐµÑ‚Ð¾Ð´Ñ‹ Ð¿Ñ€Ð¾Ð³Ñ€Ð°Ð¼Ð¼Ð¸Ñ€Ð¾Ð²Ð°Ð½Ð¸Ñ-2", Ð¡++, ÐžÐžÐŸ
+// ÍÍÃÓ, ÂÌÊ, Êóðñ "Ìåòîäû ïðîãðàììèðîâàíèÿ-2", Ñ++, ÎÎÏ
 //
-// tset.cpp - Copyright (c) Ð“ÐµÑ€Ð³ÐµÐ»ÑŒ Ð’.ÐŸ. 04.10.2001
-//   ÐŸÐµÑ€ÐµÑ€Ð°Ð±Ð¾Ñ‚Ð°Ð½Ð¾ Ð´Ð»Ñ Microsoft Visual Studio 2008 Ð¡Ñ‹ÑÐ¾ÐµÐ²Ñ‹Ð¼ Ð.Ð’. (19.04.2015)
+// tset.cpp - Copyright (c) Ãåðãåëü Â.Ï. 04.10.2001
+//   Ïåðåðàáîòàíî äëÿ Microsoft Visual Studio 2008 Ñûñîåâûì À.Â. (19.04.2015)
 //
-// ÐœÐ½Ð¾Ð¶ÐµÑÑ‚Ð²Ð¾ - Ñ€ÐµÐ°Ð»Ð¸Ð·Ð°Ñ†Ð¸Ñ Ñ‡ÐµÑ€ÐµÐ· Ð±Ð¸Ñ‚Ð¾Ð²Ñ‹Ðµ Ð¿Ð¾Ð»Ñ
+// Ìíîæåñòâî - ðåàëèçàöèÿ ÷åðåç áèòîâûå ïîëÿ
 
 #include "tset.h"
 
-TSet::TSet(int mp) : BitField(-1)
+TSet::TSet(int mp) : BitField(mp)
 {
+    MaxPower=mp;
 }
 
-// ÐºÐ¾Ð½ÑÑ‚Ñ€ÑƒÐºÑ‚Ð¾Ñ€ ÐºÐ¾Ð¿Ð¸Ñ€Ð¾Ð²Ð°Ð½Ð¸Ñ
-TSet::TSet(const TSet &s) : BitField(-1)
+// êîíñòðóêòîð êîïèðîâàíèÿ
+TSet::TSet(const TSet &s) : BitField(s.BitField)
 {
+    MaxPower=s.MaxPower;
 }
 
-// ÐºÐ¾Ð½ÑÑ‚Ñ€ÑƒÐºÑ‚Ð¾Ñ€ Ð¿Ñ€ÐµÐ¾Ð±Ñ€Ð°Ð·Ð¾Ð²Ð°Ð½Ð¸Ñ Ñ‚Ð¸Ð¿Ð°
-TSet::TSet(const TBitField &bf) : BitField(-1)
+// êîíñòðóêòîð ïðåîáðàçîâàíèÿ òèïà
+TSet::TSet(const TBitField &bf) : BitField(bf)
 {
+    MaxPower=bf.GetLength();
 }
 
 TSet::operator TBitField()
 {
+    return BitField;
 }
 
-int TSet::GetMaxPower(void) const // Ð¿Ð¾Ð»ÑƒÑ‡Ð¸Ñ‚ÑŒ Ð¼Ð°ÐºÑ. Ðº-Ð²Ð¾ ÑÐ»-Ñ‚Ð¾Ð²
+int TSet::GetMaxPower(void) const // ïîëó÷èòü ìàêñ. ê-âî ýë-òîâ
 {
+    return MaxPower;
 }
 
-int TSet::IsMember(const int Elem) const // ÑÐ»ÐµÐ¼ÐµÐ½Ñ‚ Ð¼Ð½Ð¾Ð¶ÐµÑÑ‚Ð²Ð°?
+int TSet::IsMember(const int Elem) const // ýëåìåíò ìíîæåñòâà?
 {
+    if (BitField.GetBit(Elem))
+        return 1;
     return 0;
 }
 
-void TSet::InsElem(const int Elem) // Ð²ÐºÐ»ÑŽÑ‡ÐµÐ½Ð¸Ðµ ÑÐ»ÐµÐ¼ÐµÐ½Ñ‚Ð° Ð¼Ð½Ð¾Ð¶ÐµÑÑ‚Ð²Ð°
+void TSet::InsElem(const int Elem) // âêëþ÷åíèå ýëåìåíòà ìíîæåñòâà
 {
+    BitField.SetBit(Elem);
 }
 
-void TSet::DelElem(const int Elem) // Ð¸ÑÐºÐ»ÑŽÑ‡ÐµÐ½Ð¸Ðµ ÑÐ»ÐµÐ¼ÐµÐ½Ñ‚Ð° Ð¼Ð½Ð¾Ð¶ÐµÑÑ‚Ð²Ð°
+void TSet::DelElem(const int Elem) // èñêëþ÷åíèå ýëåìåíòà ìíîæåñòâà
 {
+    BitField.ClrBit(Elem);
 }
 
-// Ñ‚ÐµÐ¾Ñ€ÐµÑ‚Ð¸ÐºÐ¾-Ð¼Ð½Ð¾Ð¶ÐµÑÑ‚Ð²ÐµÐ½Ð½Ñ‹Ðµ Ð¾Ð¿ÐµÑ€Ð°Ñ†Ð¸Ð¸
+// òåîðåòèêî-ìíîæåñòâåííûå îïåðàöèè
 
-TSet& TSet::operator=(const TSet &s) // Ð¿Ñ€Ð¸ÑÐ²Ð°Ð¸Ð²Ð°Ð½Ð¸Ðµ
+TSet& TSet::operator=(const TSet &s) // ïðèñâàèâàíèå
 {
+    BitField=s.BitField;
+    MaxPower=s.MaxPower;
+    return *this;
 }
 
-int TSet::operator==(const TSet &s) const // ÑÑ€Ð°Ð²Ð½ÐµÐ½Ð¸Ðµ
+int TSet::operator==(const TSet &s) const // ñðàâíåíèå
 {
+    if (BitField==s.BitField)
+        return 1;
     return 0;
 }
 
-int TSet::operator!=(const TSet &s) const // ÑÑ€Ð°Ð²Ð½ÐµÐ½Ð¸Ðµ
+int TSet::operator!=(const TSet &s) const // ñðàâíåíèå
 {
+    if (BitField!=s.BitField)
+        return 1;
+    return 0;
 }
 
-TSet TSet::operator+(const TSet &s) // Ð¾Ð±ÑŠÐµÐ´Ð¸Ð½ÐµÐ½Ð¸Ðµ
+TSet TSet::operator+(const TSet &s) // îáúåäèíåíèå
 {
+    return TSet(BitField|s.BitField);
 }
 
-TSet TSet::operator+(const int Elem) // Ð¾Ð±ÑŠÐµÐ´Ð¸Ð½ÐµÐ½Ð¸Ðµ Ñ ÑÐ»ÐµÐ¼ÐµÐ½Ñ‚Ð¾Ð¼
+TSet TSet::operator+(const int Elem) // îáúåäèíåíèå ñ ýëåìåíòîì
 {
+    TSet tmp(*this);
+    tmp.InsElem(Elem);
+    return tmp;
 }
 
-TSet TSet::operator-(const int Elem) // Ñ€Ð°Ð·Ð½Ð¾ÑÑ‚ÑŒ Ñ ÑÐ»ÐµÐ¼ÐµÐ½Ñ‚Ð¾Ð¼
+TSet TSet::operator-(const int Elem) // ðàçíîñòü ñ ýëåìåíòîì
 {
+    TSet tmp(*this);
+    tmp.DelElem(Elem);
+    return tmp;
 }
 
-TSet TSet::operator*(const TSet &s) // Ð¿ÐµÑ€ÐµÑÐµÑ‡ÐµÐ½Ð¸Ðµ
+TSet TSet::operator*(const TSet &s) // ïåðåñå÷åíèå
 {
+    return TSet(BitField&s.BitField);
 }
 
-TSet TSet::operator~(void) // Ð´Ð¾Ð¿Ð¾Ð»Ð½ÐµÐ½Ð¸Ðµ
+TSet TSet::operator~(void) // äîïîëíåíèå
 {
+    return TSet(~BitField);
 }
 
-// Ð¿ÐµÑ€ÐµÐ³Ñ€ÑƒÐ·ÐºÐ° Ð²Ð²Ð¾Ð´Ð°/Ð²Ñ‹Ð²Ð¾Ð´Ð°
+// ïåðåãðóçêà ââîäà/âûâîäà
 
-istream &operator>>(istream &istr, TSet &s) // Ð²Ð²Ð¾Ð´
+istream &operator>>(istream &istr, TSet &s) // ââîä
 {
+    return istr >> s.BitField;
 }
 
-ostream& operator<<(ostream &ostr, const TSet &s) // Ð²Ñ‹Ð²Ð¾Ð´
+ostream& operator<<(ostream &ostr, const TSet &s) // âûâîä
 {
+    return ostr << s.BitField;
 }

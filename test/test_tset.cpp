@@ -295,3 +295,18 @@ TEST(TSet, check_negation_operator)
 
   EXPECT_EQ(expSet, set1);
 }
+
+TEST(TSet, sets_with_first_equal_elenents_and_different_length_are_not_equal)
+{
+    TSet s1(6), s2(5);
+    s1.InsElem(3);
+    s2.InsElem(3);
+    EXPECT_NE(s1, s2);
+}
+
+TEST(TSet, two_inversions_of_set_are_equal_to_original)
+{
+    TSet s(35);
+    s.InsElem(5);
+    ASSERT_EQ(s, ~~s);
+}

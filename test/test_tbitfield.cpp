@@ -309,3 +309,17 @@ TEST(TBitField, bitfields_with_different_bits_are_not_equal)
 
   EXPECT_NE(bf1, bf2);
 }
+
+TEST(TBitField, can_compare_bitfiles_of_non_equal_size)
+{
+	const int size1 = 4, size2 = 5;
+	TBitField bf1(size1), bf2(size2);
+
+	bf1.SetBit(3);
+
+	bf2.SetBit(2);
+
+	ASSERT_TRUE(bf1 != bf2);
+}
+
+

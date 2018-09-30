@@ -11,12 +11,12 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\gtest\gtest-all.cc">
+    <ClCompile Include="..\..\..\..\..\final\mp2-lab1-set\gtest\gtest-all.cc">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\gtest\gtest.h">
+    <ClInclude Include="..\..\..\..\..\final\mp2-lab1-set\gtest\gtest.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

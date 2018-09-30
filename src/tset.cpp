@@ -7,10 +7,9 @@
 
 #include "tset.h"
 
-TSet::TSet(int mp) : BitField(-1)
+TSet::TSet(int mp) : BitField(mp)
 {
 	MaxPower = mp;
-	BitField(MaxPower);
 }
 
 // конструктор копирования
@@ -101,14 +100,14 @@ TSet TSet::operator+(const TSet &s) // объединение
 
 TSet TSet::operator+(const int Elem) // объединение с элементом
 {
-	TBitField tmp(*this);
+	TSet tmp(*this);
 	tmp.BitField.SetBit(Elem);
 	return tmp;
 }
 
 TSet TSet::operator-(const int Elem) // разность с элементом
 {
-	TBitField tmp(*this);
+	TSet tmp(*this);
 	tmp.BitField.ClrBit(Elem);
 	return tmp;
 }
@@ -134,8 +133,10 @@ TSet TSet::operator~(void) // дополнение
 
 istream &operator >> (istream &istr, TSet &s) // ввод
 {
+	return istr;
 }
 
 ostream& operator<<(ostream &ostr, const TSet &s) // вывод
 {
+	return ostr;
 }

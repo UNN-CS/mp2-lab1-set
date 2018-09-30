@@ -7,7 +7,7 @@
 
 #include "tset.h"
 
-TSet::TSet(int mp) : BitField(mp)
+TSet::TSet(int mp ) : BitField(mp)
 {
 	MaxPower = mp;
 }
@@ -60,33 +60,23 @@ void TSet::DelElem(const int Elem) // исключение элемента мн
 
 TSet& TSet::operator=(const TSet &s) // присваивание
 {
-	BitField = s.BitField;
 	MaxPower = s.MaxPower;
+	BitField = s.BitField;
 	return *this;
+  
 }
 
 int TSet::operator==(const TSet &s) const // сравнение
 {
-	if (MaxPower == s.MaxPower)
-	{
-		if (BitField == s.BitField)
-			return 1;
-		else
-			return 0;
-	}
-	return 0;
+
+	return (BitField == s.BitField);
+
 }
 
 int TSet::operator!=(const TSet &s) const // сравнение
 {
-	if (MaxPower == s.MaxPower)
-	{
-		if (BitField == s.BitField)
-			return 0;
-		else
-			return 1;
-	}
-	return 1;
+
+	return (BitField != s.BitField);
 
 }
 
@@ -133,10 +123,19 @@ TSet TSet::operator~(void) // дополнение
 
 istream &operator >> (istream &istr, TSet &s) // ввод
 {
+	int i = 0;
+	while ((i >= 0) && (i < s.MaxPower))
+	{
+		s.InsElem(i);
+		istr >> i;
+	}
 	return istr;
 }
 
 ostream& operator<<(ostream &ostr, const TSet &s) // вывод
 {
+	for (int i = 0; i < s.MaxPower; i++)
+		if (s.BitField.GetBit(i))
+			ostr << i;
 	return ostr;
 }

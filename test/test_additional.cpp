@@ -1,5 +1,5 @@
-#include "../src/tset.h"
-#include "../src/tbitfield.h"
+#include "../include/tset.h"
+#include "../include/tbitfield.h"
 #include "../gtest/gtest.h"
 
 TEST(TBitField, inverted_different_size_bitfields_not_equal)

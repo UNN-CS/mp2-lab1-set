@@ -1,4 +1,4 @@
-#include "../src/tset.h"
+#include "../include/tset.h"
 #include "../gtest/gtest.h"
 
 

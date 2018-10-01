@@ -1,13 +1,15 @@
 language: cpp
-sudo: false
+dist: trusty
+sudo: require
 addons:
   apt:
     sources:
-    - ubuntu-toolchain-r-test
+      - ubuntu-toolchain-r-test
     packages:
-    - gcc-4.8
-    - g++-4.8
-    - libusb-1.0-0-dev
+      - gcc-6
+      - g++-6
+      - clang-7
+      - cmake
 compiler:
   - gcc
   - clang
@@ -15,6 +17,9 @@ before_script:
   - mkdir ../build
   - cd ../build
 script:
+  - sudo ln -s /usr/bin/gcc-6 /usr/local/bin/gcc
+  - sudo ln -s /usr/bin/g++-6 /usr/local/bin/g++
+  - sudo ln -s /usr/bin/clang-7 /usr/local/bin/clang
   - cmake ../mp2-lab1-set
   - make -j
   - cd ./bin/

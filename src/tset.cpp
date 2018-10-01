@@ -139,7 +139,11 @@ istream &operator>>(istream &istr, TSet &s) // ввод
   char input[1024];
   char tmp[16] = { 0 };
   int i = 0;
+  const int mp = s.GetMaxPower();
   char *p = input;
+
+  for (int j = 0; j < mp; ++j)
+    s.DelElem(j);
 
   cin.getline(input, 1024);
 

@@ -1,6 +1,6 @@
-#include <tset.h>
-#include <tbitfield.h>
-#include <gtest/gtest.h>
+#include "../src/tset.h"
+#include "../src/tbitfield.h"
+#include "../gtest/gtest.h"
 
 TEST(TBitField, inverted_different_size_bitfields_not_equal)
 {

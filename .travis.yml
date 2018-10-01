@@ -1,4 +1,10 @@
 language: cpp
+sudo: required
+dist: trusty
+addons:
+  apt:
+    packages:
+      -libusb-1.0-0-dev
 compiler:
   - gcc
   - clang

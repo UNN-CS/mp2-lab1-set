@@ -5,7 +5,7 @@
 //
 // Битовое поле
 
-#include <tbitfield.h>
+#include "../include/tbitfield.h"
 
 TBitField::TBitField(int len)
 {

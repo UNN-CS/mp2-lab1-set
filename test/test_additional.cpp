@@ -2,7 +2,7 @@
 #include <tbitfield.h>
 #include <gtest/gtest.h>
 
-TEST(TBitField, inverted_different_size_bitfields_not_equal)
+TEST(MyTest, inverted_different_size_bitfields_not_equal)
 {
   TBitField firstBF(4), secondBF(3), negFirstBF(4);
 
@@ -19,7 +19,7 @@ TEST(TBitField, inverted_different_size_bitfields_not_equal)
   EXPECT_NE(negFirstBF, secondBF);
 }
 
-TEST(TSet, operator_diff_on_two_not_equal_sets_dont_makes_equal)
+TEST(MyTest, operator_diff_on_two_not_equal_sets_dont_makes_equal)
 {
   TSet firstSet(6), secondSet(5);
 
@@ -37,7 +37,7 @@ TEST(TSet, operator_diff_on_two_not_equal_sets_dont_makes_equal)
   EXPECT_NE(firstSet, secondSet);
 }
 
-TEST(TSet, fun_test)
+TEST(MyTest, fun_test)
 {
   TSet funSet(20), negFunSet(20);
 

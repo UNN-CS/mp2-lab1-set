@@ -4,66 +4,66 @@
 
 TEST(TBitField, multiple_and_operator)
 {
-	const int size = 17;
-	TBitField bf1(size), bf2(size), bf3(size);
-	TBitField res(size);
-
-	//bf1 =               00100100100110100
-	//bf2 =               00100100100110000
-	//bf3 =               00000101100110010
-	//bf1 & bf2 & bf3   = 00000100100110000
-	bf1.SetBit(2);
-	bf1.SetBit(4);
-	bf1.SetBit(5);
-	bf1.SetBit(8);
-	bf1.SetBit(11);
-	bf1.SetBit(14);
-	bf2.SetBit(4);
-	bf2.SetBit(5);
-	bf2.SetBit(8);
-	bf2.SetBit(11);
-	bf2.SetBit(14);
-	bf3.SetBit(1);
-	bf3.SetBit(4);
-	bf3.SetBit(5);
-	bf3.SetBit(8);
-	bf3.SetBit(9);
-	bf3.SetBit(11);
-	res.SetBit(4);
-	res.SetBit(5);
-	res.SetBit(8);
-	res.SetBit(11);
-
-	EXPECT_EQ(res, bf1 & bf2 & bf3);
+  const int size = 17;
+  TBitField bf1(size), bf2(size), bf3(size);
+  TBitField res(size);
+  
+  //bf1 =               00100100100110100
+  //bf2 =               00100100100110000
+  //bf3 =               00000101100110010
+  //bf1 & bf2 & bf3   = 00000100100110000
+  bf1.SetBit(2);
+  bf1.SetBit(4);
+  bf1.SetBit(5);
+  bf1.SetBit(8);
+  bf1.SetBit(11);
+  bf1.SetBit(14);
+  bf2.SetBit(4);
+  bf2.SetBit(5);
+  bf2.SetBit(8);
+  bf2.SetBit(11);
+  bf2.SetBit(14);
+  bf3.SetBit(1);
+  bf3.SetBit(4);
+  bf3.SetBit(5);
+  bf3.SetBit(8);
+  bf3.SetBit(9);
+  bf3.SetBit(11);
+  res.SetBit(4);
+  res.SetBit(5);
+  res.SetBit(8);
+  res.SetBit(11);
+  
+  EXPECT_EQ(res, bf1 & bf2 & bf3);
 }
 
 TEST(TBitField, multiple_or_operator)
 {
-	const int size = 17;
-	TBitField bf1(size), bf2(size), bf3(size);
-	TBitField res(size);
-	
-	//bf1 =               00000000100000010
-	//bf2 =               10100000000001001
-	//bf3 =               00000000010000001
-	//bf1 | bf2 | bf3   = 10100000110001011
-	bf1.SetBit(8);
-	bf1.SetBit(1);
-	bf2.SetBit(3);
-	bf2.SetBit(16);
-	bf2.SetBit(14);
-	bf2.SetBit(0);
-	bf3.SetBit(0);
-	bf3.SetBit(7);
-	res.SetBit(0);
-	res.SetBit(1);
-	res.SetBit(3);
-	res.SetBit(7);
-	res.SetBit(8);
-	res.SetBit(14);
-	res.SetBit(16);
+  const int size = 17;
+  TBitField bf1(size), bf2(size), bf3(size);
+  TBitField res(size);
+  
+  //bf1 =               00000000100000010
+  //bf2 =               10100000000001001
+  //bf3 =               00000000010000001
+  //bf1 | bf2 | bf3   = 10100000110001011
+  bf1.SetBit(8);
+  bf1.SetBit(1);
+  bf2.SetBit(3);
+  bf2.SetBit(16);
+  bf2.SetBit(14);
+  bf2.SetBit(0);
+  bf3.SetBit(0);
+  bf3.SetBit(7);
+  res.SetBit(0);
+  res.SetBit(1);
+  res.SetBit(3);
+  res.SetBit(7);
+  res.SetBit(8);
+  res.SetBit(14);
+  res.SetBit(16);
 
-	EXPECT_EQ(res, bf1 | bf2 | bf3);
+  EXPECT_EQ(res, bf1 | bf2 | bf3);
 }
 
 TEST(TBitField, can_create_bitfield_with_positive_length)

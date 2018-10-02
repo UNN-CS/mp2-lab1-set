@@ -1,88 +1,136 @@
-// ĞĞĞ“Ğ£, Ğ’ĞœĞš, ĞšÑƒÑ€Ñ "ĞœĞµÑ‚Ğ¾Ğ´Ñ‹ Ğ¿Ñ€Ğ¾Ğ³Ñ€Ğ°Ğ¼Ğ¼Ğ¸Ñ€Ğ¾Ğ²Ğ°Ğ½Ğ¸Ñ-2", Ğ¡++, ĞĞĞŸ
+// ÍÍÃÓ, ÂÌÊ, Êóğñ "Ìåòîäû ïğîãğàììèğîâàíèÿ-2", Ñ++, ÎÎÏ
 //
-// tset.cpp - Copyright (c) Ğ“ĞµÑ€Ğ³ĞµĞ»ÑŒ Ğ’.ĞŸ. 04.10.2001
-//   ĞŸĞµÑ€ĞµÑ€Ğ°Ğ±Ğ¾Ñ‚Ğ°Ğ½Ğ¾ Ğ´Ğ»Ñ Microsoft Visual Studio 2008 Ğ¡Ñ‹ÑĞ¾ĞµĞ²Ñ‹Ğ¼ Ğ.Ğ’. (19.04.2015)
+// tset.cpp - Copyright (c) Ãåğãåëü Â.Ï. 04.10.2001
+//   Ïåğåğàáîòàíî äëÿ Microsoft Visual Studio 2008 Ñûñîåâûì À.Â. (19.04.2015)
 //
-// ĞœĞ½Ğ¾Ğ¶ĞµÑÑ‚Ğ²Ğ¾ - Ñ€ĞµĞ°Ğ»Ğ¸Ğ·Ğ°Ñ†Ğ¸Ñ Ñ‡ĞµÑ€ĞµĞ· Ğ±Ğ¸Ñ‚Ğ¾Ğ²Ñ‹Ğµ Ğ¿Ğ¾Ğ»Ñ
+// Ìíîæåñòâî - ğåàëèçàöèÿ ÷åğåç áèòîâûå ïîëÿ
 
 #include "tset.h"
 
-TSet::TSet(int mp) : BitField(-1)
+TSet::TSet(int mp) : BitField(mp)
 {
+	MaxPower = mp;
 }
 
-// ĞºĞ¾Ğ½ÑÑ‚Ñ€ÑƒĞºÑ‚Ğ¾Ñ€ ĞºĞ¾Ğ¿Ğ¸Ñ€Ğ¾Ğ²Ğ°Ğ½Ğ¸Ñ
-TSet::TSet(const TSet &s) : BitField(-1)
+// êîíñòğóêòîğ êîïèğîâàíèÿ
+TSet::TSet(const TSet &s) : BitField(s.BitField)
 {
+	MaxPower = s.MaxPower;
 }
 
-// ĞºĞ¾Ğ½ÑÑ‚Ñ€ÑƒĞºÑ‚Ğ¾Ñ€ Ğ¿Ñ€ĞµĞ¾Ğ±Ñ€Ğ°Ğ·Ğ¾Ğ²Ğ°Ğ½Ğ¸Ñ Ñ‚Ğ¸Ğ¿Ğ°
-TSet::TSet(const TBitField &bf) : BitField(-1)
+// êîíñòğóêòîğ ïğåîáğàçîâàíèÿ òèïà
+TSet::TSet(const TBitField &bf) : BitField(bf)
 {
+	MaxPower = bf.GetLength();
 }
 
 TSet::operator TBitField()
 {
+	TBitField tmp(this->BitField);
+	return tmp;
 }
 
-int TSet::GetMaxPower(void) const // Ğ¿Ğ¾Ğ»ÑƒÑ‡Ğ¸Ñ‚ÑŒ Ğ¼Ğ°ĞºÑ. Ğº-Ğ²Ğ¾ ÑĞ»-Ñ‚Ğ¾Ğ²
+int TSet::GetMaxPower(void) const // ïîëó÷èòü ìàêñ. ê-âî ıë-òîâ
 {
+	return  MaxPower;
 }
 
-int TSet::IsMember(const int Elem) const // ÑĞ»ĞµĞ¼ĞµĞ½Ñ‚ Ğ¼Ğ½Ğ¾Ğ¶ĞµÑÑ‚Ğ²Ğ°?
+int TSet::IsMember(const int Elem) const // ıëåìåíò ìíîæåñòâà?
 {
-    return 0;
+	return BitField.GetBit(Elem);
 }
 
-void TSet::InsElem(const int Elem) // Ğ²ĞºĞ»ÑÑ‡ĞµĞ½Ğ¸Ğµ ÑĞ»ĞµĞ¼ĞµĞ½Ñ‚Ğ° Ğ¼Ğ½Ğ¾Ğ¶ĞµÑÑ‚Ğ²Ğ°
+void TSet::InsElem(const int Elem) // âêëş÷åíèå ıëåìåíòà ìíîæåñòâà
 {
+	BitField.SetBit(Elem);
 }
 
-void TSet::DelElem(const int Elem) // Ğ¸ÑĞºĞ»ÑÑ‡ĞµĞ½Ğ¸Ğµ ÑĞ»ĞµĞ¼ĞµĞ½Ñ‚Ğ° Ğ¼Ğ½Ğ¾Ğ¶ĞµÑÑ‚Ğ²Ğ°
+void TSet::DelElem(const int Elem) // èñêëş÷åíèå ıëåìåíòà ìíîæåñòâà
 {
+	BitField.ClrBit(Elem);
 }
 
-// Ñ‚ĞµĞ¾Ñ€ĞµÑ‚Ğ¸ĞºĞ¾-Ğ¼Ğ½Ğ¾Ğ¶ĞµÑÑ‚Ğ²ĞµĞ½Ğ½Ñ‹Ğµ Ğ¾Ğ¿ĞµÑ€Ğ°Ñ†Ğ¸Ğ¸
+// òåîğåòèêî-ìíîæåñòâåííûå îïåğàöèè
 
-TSet& TSet::operator=(const TSet &s) // Ğ¿Ñ€Ğ¸ÑĞ²Ğ°Ğ¸Ğ²Ğ°Ğ½Ğ¸Ğµ
+TSet& TSet::operator=(const TSet &s) // ïğèñâàèâàíèå
 {
+	MaxPower = s.MaxPower;
+	BitField = s.BitField;
+	return(*this);
 }
 
-int TSet::operator==(const TSet &s) const // ÑÑ€Ğ°Ğ²Ğ½ĞµĞ½Ğ¸Ğµ
+int TSet::operator==(const TSet &s) const // ñğàâíåíèå
 {
-    return 0;
+	int res = 0;
+	if (BitField == s.BitField)
+		res = 1;
+	return res;
 }
 
-int TSet::operator!=(const TSet &s) const // ÑÑ€Ğ°Ğ²Ğ½ĞµĞ½Ğ¸Ğµ
+int TSet::operator!=(const TSet &s) const // ñğàâíåíèå
 {
+	int res = 0;
+	if (BitField != s.BitField)
+		res = 1;
+	return res;
 }
 
-TSet TSet::operator+(const TSet &s) // Ğ¾Ğ±ÑŠĞµĞ´Ğ¸Ğ½ĞµĞ½Ğ¸Ğµ
+TSet TSet::operator+(const TSet &s) // îáúåäèíåíèå
 {
+	return(BitField | s.BitField);
 }
 
-TSet TSet::operator+(const int Elem) // Ğ¾Ğ±ÑŠĞµĞ´Ğ¸Ğ½ĞµĞ½Ğ¸Ğµ Ñ ÑĞ»ĞµĞ¼ĞµĞ½Ñ‚Ğ¾Ğ¼
+TSet TSet::operator+(const int Elem) // îáúåäèíåíèå ñ ıëåìåíòîì
 {
+	TSet temp(MaxPower);
+	temp = (*this);
+	temp.InsElem(Elem);
+	return temp;
 }
 
-TSet TSet::operator-(const int Elem) // Ñ€Ğ°Ğ·Ğ½Ğ¾ÑÑ‚ÑŒ Ñ ÑĞ»ĞµĞ¼ĞµĞ½Ñ‚Ğ¾Ğ¼
+TSet TSet::operator-(const int Elem) // ğàçíîñòü ñ ıëåìåíòîì
 {
+	TSet temp(MaxPower);
+	temp = (*this);
+	temp.DelElem(Elem);
+	return temp;
 }
 
-TSet TSet::operator*(const TSet &s) // Ğ¿ĞµÑ€ĞµÑĞµÑ‡ĞµĞ½Ğ¸Ğµ
+TSet TSet::operator*(const TSet &s) // ïåğåñå÷åíèå
 {
+	TSet tmp(BitField & s.BitField);
+	return tmp;
 }
 
-TSet TSet::operator~(void) // Ğ´Ğ¾Ğ¿Ğ¾Ğ»Ğ½ĞµĞ½Ğ¸Ğµ
+TSet TSet::operator~(void) // äîïîëíåíèå
 {
+	return (~BitField);
 }
 
-// Ğ¿ĞµÑ€ĞµĞ³Ñ€ÑƒĞ·ĞºĞ° Ğ²Ğ²Ğ¾Ğ´Ğ°/Ğ²Ñ‹Ğ²Ğ¾Ğ´Ğ°
+// ïåğåãğóçêà ââîäà/âûâîäà
 
-istream &operator>>(istream &istr, TSet &s) // Ğ²Ğ²Ğ¾Ğ´
+istream &operator>>(istream &istr, TSet &s) // ââîä
 {
+	int numb;
+	for (int i = 0; i < s.MaxPower; i++)
+	{
+		istr >> numb;
+		if ((numb >= 0) && (numb < s.MaxPower))
+			s.InsElem(numb);
+		else break;
+	}
+	return istr;
 }
 
-ostream& operator<<(ostream &ostr, const TSet &s) // Ğ²Ñ‹Ğ²Ğ¾Ğ´
+ostream& operator<<(ostream &ostr, const TSet &s) // âûâîä
 {
+	int i;
+	ostr << "{ ";
+	for (i = 0; i < s.MaxPower; i++)
+	{
+		if (s.IsMember(i))
+			ostr << i << " ";
+	}
+	ostr << "}";
+	return ostr;
 }

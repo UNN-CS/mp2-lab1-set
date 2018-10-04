@@ -295,3 +295,21 @@ TEST(TSet, check_negation_operator)
 
   EXPECT_EQ(expSet, set1);
 }
+
+TEST(TSet, my_test_no_name_number_one)
+{
+	const int size = 2;
+	TSet set(size);
+	// set = {0}
+	set.InsElem(0);
+
+	EXPECT_EQ(1, set.IsMember(0));
+}
+
+TEST(TSet, throw_in_assignment_operator)
+{
+	const int size = 3;
+	TSet set(size);
+
+	EXPECT_ANY_THROW(set = set);
+}

@@ -3,15 +3,13 @@
 //
 
 
-// ННГУ, ВМК, Курс "Методы программирования-2", С++, ООП
-//
-// tbitfield.cpp - Copyright (c) Гергель В.П. 07.05.2001
-//   Переработано для Microsoft Visual Studio 2008 Сысоевым А.В. (19.04.2015)
-//
-// Битовое поле
+
 
 
 #include <iostream>
+
+
+
 #include "tbitfield.h"
 
 
@@ -81,6 +79,7 @@ void TBitField::ClrBit(const int n) // очистить бит
 
 int TBitField::GetBit(const int n) const // получить значение бита
 {
+	return 0;
 	if ((n < 0) || (n > BitLen))
 		throw "Negative bit";
 	if ((pMem[GetMemIndex(n)] & GetMemMask(n)) == 0)

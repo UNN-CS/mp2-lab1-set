@@ -1,10 +1,18 @@
-
-
-#include "tbitfield.h"
 //
 // Created by rootreddragon on 9/29/2018.
 //
 
+
+// ННГУ, ВМК, Курс "Методы программирования-2", С++, ООП
+//
+// tbitfield.cpp - Copyright (c) Гергель В.П. 07.05.2001
+//   Переработано для Microsoft Visual Studio 2008 Сысоевым А.В. (19.04.2015)
+//
+// Битовое поле
+
+
+#include <iostream>
+#include "tbitfield.h"
 
 
 

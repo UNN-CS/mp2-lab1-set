@@ -1,0 +1,14 @@
+language: cpp
+compiler:
+  - gcc
+  - clang
+before_script:
+  - mkdir ../build
+  - cd ../build
+script:
+  - cmake ../mp2-lab1-set
+  - make -j
+  - cd ./bin/
+  - ./test_set --gtest_list_tests
+notifications:
+  email: false

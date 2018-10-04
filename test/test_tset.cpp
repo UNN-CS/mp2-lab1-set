@@ -1,297 +1,211 @@
-#include "tset.h"
+﻿// ННГУ, ВМК, Курс "Методы программирования-2", С++, ООП
+//
+// tbitfield.cpp - Copyright (c) Гергель В.П. 07.05.2001
+//   Переработано для Microsoft Visual Studio 2008 Сысоевым А.В. (19.04.2015)
+//
+// Битовое поле
 
-#include <gtest.h>
+#include "tbitfield.h"
+//
+// Created by rootreddragon on 9/29/2018.
+//
 
-TEST(TSet, can_get_max_power_set)
+
+
+
+
+
+
+
+#define BITS_IN_ONE_MEM (sizeof(TELEM) * 8)
+
+TBitField::TBitField(int len)
 {
-  const int size = 5;
-  TSet set(size);
-
-  EXPECT_EQ(size, set.GetMaxPower());
+	if (len < 0)
+		throw "negative length";
+	BitLen = len;
+	MemLen = BitLen / BITS_IN_ONE_MEM + 1;
+	pMem = new TELEM[MemLen];
+	for (int i = 0; i < MemLen; i++)
+		pMem[i] = 0;
 }
 
-TEST(TSet, can_insert_non_existing_element)
-{
-  const int size = 5, k = 3;
-  TSet set(size);
-  set.InsElem(k);
 
-  EXPECT_NE(set.IsMember(k), 0);
+TBitField::TBitField(const TBitField &bf) // конструктор копирования
+{
+	BitLen = bf.BitLen;
+	MemLen = BitLen / BITS_IN_ONE_MEM + 1;
+	pMem = new TELEM[MemLen];
+	for (int i = 0; i < MemLen; i++)
+		pMem[i] = bf.pMem[i];
 }
 
-TEST(TSet, can_insert_existing_element)
+TBitField::~TBitField()
 {
-  const int size = 5;
-  const int k = 3;
-  TSet set(size);
-  set.InsElem(k);
-  set.InsElem(k);
-
-  EXPECT_NE(set.IsMember(k), 0);
+	delete[] pMem;
 }
 
-TEST(TSet, can_delete_non_existing_element)
+int TBitField::GetMemIndex(const int n) const // индекс Мем для бита n
 {
-  const int size = 5, k = 3;
-  TSet set(size);
-  set.DelElem(k);
-
-  EXPECT_EQ(set.IsMember(k), 0);
+	return n / BITS_IN_ONE_MEM;
 }
 
-TEST(TSet, can_delete_existing_element)
+TELEM TBitField::GetMemMask(const int n) const // битовая маска для бита n
 {
-  const int size = 5, k = 3;
-  TSet set(size);
-
-  set.InsElem(k);
-  EXPECT_GT(set.IsMember(k), 0);
-
-  set.DelElem(k);
-  EXPECT_EQ(set.IsMember(k), 0);
+	return 1 << (n % BITS_IN_ONE_MEM);
 }
 
-TEST(TSet, compare_two_sets_of_non_equal_sizes)
-{
-  const int size1 = 4, size2 = 6;
-  TSet set1(size1), set2(size2);
+// доступ к битам битового поля
 
-  EXPECT_EQ(1, set1 != set2);
+int TBitField::GetLength(void) const // получить длину (к-во битов)
+{
+	return BitLen;
 }
 
-TEST(TSet, compare_two_equal_sets)
+void TBitField::SetBit(const int n) // установить бит
 {
-  const int size = 4;
-  TSet set1(size), set2(size);
-  // set1 = set2 = {1, 3}
-  set1.InsElem(1);
-  set1.InsElem(3);
-  set2.InsElem(1);
-  set2.InsElem(3);
-
-  EXPECT_EQ(set1, set2);
+	if ((n < 0) || (n > BitLen))
+		throw "Negative bit";
+	pMem[GetMemIndex(n)] |= GetMemMask(n);
 }
 
-TEST(TSet, compare_two_non_equal_sets)
+void TBitField::ClrBit(const int n) // очистить бит
 {
-  const int size = 4;
-  TSet set1(size), set2(size);
-  // set1 = {1, 3}
-  set1.InsElem(1);
-  set1.InsElem(3);
-  // set2 = {1, 2}
-  set2.InsElem(1);
-  set2.InsElem(2);
-
-  EXPECT_EQ(1, set1 != set2);
+	if ((n < 0) || (n > BitLen))
+		throw "Negative bit";
+	pMem[GetMemIndex(n)] &= ~(GetMemMask(n));
 }
 
-TEST(TSet, can_assign_set_of_equal_size)
+int TBitField::GetBit(const int n) const // получить значение бита
 {
-  const int size = 4;
-  TSet set1(size), set2(size);
-  // set1 = {1, 3}
-  set1.InsElem(1);
-  set1.InsElem(3);
-  set2 = set1;
-
-  EXPECT_EQ(set1, set2);
+	if ((n < 0) || (n > BitLen))
+		throw "Negative bit";
+	if ((pMem[GetMemIndex(n)] & GetMemMask(n)) == 0)
+		return 0;
+	else
+		return 1;
 }
 
-TEST(TSet, can_assign_set_of_greater_size)
-{
-  const int size1 = 4, size2 = 6;
-  TSet set1(size1), set2(size2);
-  // set1 = {1, 3}
-  set1.InsElem(1);
-  set1.InsElem(3);
-  set2 = set1;
+// битовые операции
 
-  EXPECT_EQ(set1, set2);
+TBitField& TBitField::operator=(const TBitField &bf) // присваивание
+{
+	if (BitLen == bf.BitLen)
+	{
+		for (int i = 0; i < MemLen; i++)
+			pMem[i] = bf.pMem[i];
+	}
+	else
+	{
+		delete[] pMem;
+		BitLen = bf.BitLen;
+		MemLen = BitLen / BITS_IN_ONE_MEM + 1;
+		pMem = new TELEM[MemLen];
+		for (int i = 0; i < MemLen; i++)
+			pMem[i] = bf.pMem[i];
+	}
+	return *this;
 }
 
-TEST(TSet, can_assign_set_of_less_size)
+int TBitField::operator==(const TBitField &bf) const // сравнение
 {
-  const int size1 = 6, size2 = 4;
-  TSet set1(size1), set2(size2);
-  // set1 = {1, 3, 5}
-  set1.InsElem(1);
-  set1.InsElem(3);
-  set1.InsElem(5);
-  set2 = set1;
+	if (BitLen != bf.BitLen)
+		return 0;
+	else
+	{
+		int f = 1;
+		for (int i = 0; (i < bf.MemLen) && (f); i++)
+			if (pMem[i] != bf.pMem[i])
+				f = 0;
 
-  EXPECT_EQ(set1, set2);
+		return f;
+	}
 }
 
-TEST(TSet, can_insert_non_existing_element_using_plus_operator)
+int TBitField::operator!=(const TBitField &bf) const // сравнение
 {
-  const int size = 4;
-  const int k = 3;
-  TSet set(size), updatedSet(size);
-  set.InsElem(0);
-  set.InsElem(2);
-  updatedSet = set + k;
-
-  EXPECT_NE(0, updatedSet.IsMember(k));
+	return !(*this == bf);
 }
 
-TEST(TSet, throws_when_insert_non_existing_element_out_of_range_using_plus_operator)
+TBitField TBitField::operator|(const TBitField &bf) // операция "или"
 {
-  const int size = 4;
-  const int k = 6;
-  TSet set(size), updatedSet(size);
-  set.InsElem(0);
-  set.InsElem(2);
-
-  ASSERT_ANY_THROW(updatedSet = set + k);
+	if (BitLen > bf.BitLen)
+	{
+		TBitField b(BitLen);
+		for (int i = 0; i < bf.MemLen; i++)
+			b.pMem[i] = pMem[i] | bf.pMem[i];
+		for (int i = bf.MemLen; i < b.MemLen; i++)
+			b.pMem[i] = pMem[i];
+		return b;
+	}
+	else
+	{
+		TBitField b(bf.BitLen);
+		for (int i = 0; i < MemLen; i++)
+			b.pMem[i] = pMem[i] | bf.pMem[i];
+		for (int i = MemLen; i < b.MemLen; i++)
+			b.pMem[i] = bf.pMem[i];
+		return b;
+	}
 }
 
-TEST(TSet, can_insert_existing_element_using_plus_operator)
+TBitField TBitField::operator&(const TBitField &bf) // операция "и"
 {
-  const int size = 4;
-  const int k = 3;
-  TSet set(size), updatedSet(size);
-  set.InsElem(0);
-  set.InsElem(k);
-  updatedSet = set + k;
-
-  EXPECT_NE(0, set.IsMember(k));
+	if (BitLen > bf.BitLen)
+	{
+		TBitField b(BitLen);
+		for (int i = 0; i < bf.MemLen; i++)
+			b.pMem[i] = pMem[i] & bf.pMem[i];
+		for (int i = bf.MemLen; i < b.MemLen; i++)
+			b.pMem[i] = 0;
+		return b;
+	}
+	else
+	{
+		TBitField b(bf.BitLen);
+		for (int i = 0; i < MemLen; i++)
+			b.pMem[i] = pMem[i] & bf.pMem[i];
+		for (int i = MemLen; i < b.MemLen; i++)
+			b.pMem[i] = 0;
+		return b;
+	}
 }
 
-TEST(TSet, check_size_of_the_combination_of_two_sets_of_equal_size)
+TBitField TBitField::operator~(void) // отрицание
 {
-  const int size = 5;
-  TSet set1(size), set2(size), set3(size);
-  // set1 = {1, 2, 4}
-  set1.InsElem(1);
-  set1.InsElem(2);
-  set1.InsElem(4);
-  // set2 = {0, 1, 2}
-  set2.InsElem(0);
-  set2.InsElem(1);
-  set2.InsElem(2);
-  set3 = set1 + set2;
-
-  EXPECT_EQ(size, set3.GetMaxPower());
+	TBitField b(BitLen);
+	for (int i = 0; i < MemLen - 1; i++)
+		b.pMem[i] = ~pMem[i];
+	for (int i = ((MemLen - 1) * BITS_IN_ONE_MEM); i < BitLen; i++)
+		if (GetBit(i) == 0)
+			b.SetBit(i);
+		else
+			b.ClrBit(i);
+	return b;
 }
 
-TEST(TSet, can_combine_two_sets_of_equal_size)
-{
-  const int size = 5;
-  TSet set1(size), set2(size), set3(size), expSet(size);
-  // set1 = {1, 2, 4}
-  set1.InsElem(1);
-  set1.InsElem(2);
-  set1.InsElem(4);
-  // set2 = {0, 1, 2}
-  set2.InsElem(0);
-  set2.InsElem(1);
-  set2.InsElem(2);
-  set3 = set1 + set2;
-  // expSet = {0, 1, 2, 4}
-  expSet.InsElem(0);
-  expSet.InsElem(1);
-  expSet.InsElem(2);
-  expSet.InsElem(4);
+// ввод/вывод
 
-  EXPECT_EQ(expSet, set3);
+istream &operator>>(istream &istr, TBitField &bf) // ввод
+{
+	cout << "BitLen ?" << endl;
+	int len = 0;
+	istr >> len;
+	for (int i = 0; i < len; i++)
+	{
+		int f = 0;
+		istr >> f;
+		if (f == 1)
+			bf.SetBit(i);
+	}
+	return istr;
 }
 
-TEST(TSet, check_size_changes_of_the_combination_of_two_sets_of_non_equal_size)
+ostream &operator<<(ostream &ostr, const TBitField &bf) // вывод
 {
-  const int size1 = 5, size2 = 7;
-  TSet set1(size1), set2(size2), set3(size1);
-  // set1 = {1, 2, 4}
-  set1.InsElem(1);
-  set1.InsElem(2);
-  set1.InsElem(4);
-  // set2 = {0, 1, 2}
-  set2.InsElem(0);
-  set2.InsElem(1);
-  set2.InsElem(2);
-  set3 = set1 + set2;
-
-  EXPECT_EQ(size2, set3.GetMaxPower());
-}
-
-TEST(TSet, can_combine_two_sets_of_non_equal_size)
-{
-  const int size1 = 5, size2 = 7;
-  TSet set1(size1), set2(size2), set3(size1), expSet(size2);
-  // set1 = {1, 2, 4}
-  set1.InsElem(1);
-  set1.InsElem(2);
-  set1.InsElem(4);
-  // set2 = {0, 1, 2, 6}
-  set2.InsElem(0);
-  set2.InsElem(1);
-  set2.InsElem(2);
-  set2.InsElem(6);
-  set3 = set1 + set2;
-  // expSet = {0, 1, 2, 4, 6}
-  expSet.InsElem(0);
-  expSet.InsElem(1);
-  expSet.InsElem(2);
-  expSet.InsElem(4);
-  expSet.InsElem(6);
-
-  EXPECT_EQ(expSet, set3);
-}
-
-TEST(TSet, can_intersect_two_sets_of_equal_size)
-{
-  const int size = 5;
-  TSet set1(size), set2(size), set3(size), expSet(size);
-  // set1 = {1, 2, 4}
-  set1.InsElem(1);
-  set1.InsElem(2);
-  set1.InsElem(4);
-  // set2 = {0, 1, 2}
-  set2.InsElem(0);
-  set2.InsElem(1);
-  set2.InsElem(2);
-  set3 = set1 * set2;
-  // expSet = {1, 2}
-  expSet.InsElem(1);
-  expSet.InsElem(2);
-
-  EXPECT_EQ(expSet, set3);
-}
-
-TEST(TSet, can_intersect_two_sets_of_non_equal_size)
-{
-  const int size1 = 5, size2 = 7;
-  TSet set1(size1), set2(size2), set3(size1), expSet(size2);
-  // set1 = {1, 2, 4}
-  set1.InsElem(1);
-  set1.InsElem(2);
-  set1.InsElem(4);
-  // set2 = {0, 1, 2, 4, 6}
-  set2.InsElem(0);
-  set2.InsElem(1);
-  set2.InsElem(2);
-  set2.InsElem(4);
-  set2.InsElem(6);
-  set3 = set1 * set2;
-  // expSet = {1, 2, 4}
-  expSet.InsElem(1);
-  expSet.InsElem(2);
-  expSet.InsElem(4);
-
-  EXPECT_EQ(expSet, set3);
-}
-
-TEST(TSet, check_negation_operator)
-{
-  const int size = 4;
-  TSet set(size), set1(size), expSet(size);
-  // set1 = {1, 3}
-  set.InsElem(1);
-  set.InsElem(3);
-  set1 = ~set;
-  // expSet = {0, 2}
-  expSet.InsElem(0);
-  expSet.InsElem(2);
-
-  EXPECT_EQ(expSet, set1);
+	ostr << "{ ";
+	for (int i = 0; i < bf.BitLen; i++)
+		ostr << bf.GetBit(i);
+	ostr << "}\n";
+	return ostr;
 }

@@ -1,297 +1,138 @@
+
 #include "tset.h"
-
 #include <gtest.h>
+//
+// Created by rootreddragon on 9/29/2018.
+//
 
-TEST(TSet, can_get_max_power_set)
+
+
+TSet::TSet(int mp) : BitField(mp)
 {
-  const int size = 5;
-  TSet set(size);
-
-  EXPECT_EQ(size, set.GetMaxPower());
+	MaxPower = mp;
 }
 
-TEST(TSet, can_insert_non_existing_element)
+// конструктор копирования
+TSet::TSet(const TSet &s) : BitField(s.MaxPower)
 {
-  const int size = 5, k = 3;
-  TSet set(size);
-  set.InsElem(k);
-
-  EXPECT_NE(set.IsMember(k), 0);
+	MaxPower = s.MaxPower;
+	BitField = s.BitField;
 }
 
-TEST(TSet, can_insert_existing_element)
+// конструктор преобразования типа
+TSet::TSet(const TBitField &bf) : BitField(bf.GetLength())
 {
-  const int size = 5;
-  const int k = 3;
-  TSet set(size);
-  set.InsElem(k);
-  set.InsElem(k);
-
-  EXPECT_NE(set.IsMember(k), 0);
+	MaxPower = bf.GetLength();
+	BitField = bf;
 }
 
-TEST(TSet, can_delete_non_existing_element)
+TSet::operator TBitField()
 {
-  const int size = 5, k = 3;
-  TSet set(size);
-  set.DelElem(k);
-
-  EXPECT_EQ(set.IsMember(k), 0);
+	return BitField;
 }
 
-TEST(TSet, can_delete_existing_element)
+int TSet::GetMaxPower(void) const // получить макс. к-во эл-тов
 {
-  const int size = 5, k = 3;
-  TSet set(size);
-
-  set.InsElem(k);
-  EXPECT_GT(set.IsMember(k), 0);
-
-  set.DelElem(k);
-  EXPECT_EQ(set.IsMember(k), 0);
+	return MaxPower;
 }
 
-TEST(TSet, compare_two_sets_of_non_equal_sizes)
+int TSet::IsMember(const int Elem) const // элемент множества?
 {
-  const int size1 = 4, size2 = 6;
-  TSet set1(size1), set2(size2);
-
-  EXPECT_EQ(1, set1 != set2);
+	if (BitField.GetBit(Elem) == 1)
+		return 1;
+	else
+		return 0;
 }
 
-TEST(TSet, compare_two_equal_sets)
+void TSet::InsElem(const int Elem) // включение элемента множества
 {
-  const int size = 4;
-  TSet set1(size), set2(size);
-  // set1 = set2 = {1, 3}
-  set1.InsElem(1);
-  set1.InsElem(3);
-  set2.InsElem(1);
-  set2.InsElem(3);
-
-  EXPECT_EQ(set1, set2);
+	BitField.SetBit(Elem);
 }
 
-TEST(TSet, compare_two_non_equal_sets)
+void TSet::DelElem(const int Elem) // исключение элемента множества
 {
-  const int size = 4;
-  TSet set1(size), set2(size);
-  // set1 = {1, 3}
-  set1.InsElem(1);
-  set1.InsElem(3);
-  // set2 = {1, 2}
-  set2.InsElem(1);
-  set2.InsElem(2);
-
-  EXPECT_EQ(1, set1 != set2);
+	BitField.ClrBit(Elem);
 }
 
-TEST(TSet, can_assign_set_of_equal_size)
-{
-  const int size = 4;
-  TSet set1(size), set2(size);
-  // set1 = {1, 3}
-  set1.InsElem(1);
-  set1.InsElem(3);
-  set2 = set1;
+// теоретико-множественные операции
 
-  EXPECT_EQ(set1, set2);
+TSet& TSet::operator=(const TSet &s) // присваивание
+{
+	MaxPower = s.MaxPower;
+	BitField = s.BitField;
+	return *this;
 }
 
-TEST(TSet, can_assign_set_of_greater_size)
+int TSet::operator==(const TSet &s) const // сравнение
 {
-  const int size1 = 4, size2 = 6;
-  TSet set1(size1), set2(size2);
-  // set1 = {1, 3}
-  set1.InsElem(1);
-  set1.InsElem(3);
-  set2 = set1;
-
-  EXPECT_EQ(set1, set2);
+	return (BitField == s.BitField);
 }
 
-TEST(TSet, can_assign_set_of_less_size)
+int TSet::operator!=(const TSet &s) const // сравнение
 {
-  const int size1 = 6, size2 = 4;
-  TSet set1(size1), set2(size2);
-  // set1 = {1, 3, 5}
-  set1.InsElem(1);
-  set1.InsElem(3);
-  set1.InsElem(5);
-  set2 = set1;
-
-  EXPECT_EQ(set1, set2);
+	return !(*this == s);
 }
 
-TEST(TSet, can_insert_non_existing_element_using_plus_operator)
+TSet TSet::operator+(const TSet &s) // объединение
 {
-  const int size = 4;
-  const int k = 3;
-  TSet set(size), updatedSet(size);
-  set.InsElem(0);
-  set.InsElem(2);
-  updatedSet = set + k;
-
-  EXPECT_NE(0, updatedSet.IsMember(k));
+	TSet b(1);
+	b.BitField = BitField | s.BitField;
+	b.MaxPower = b.BitField.GetLength();
+	return b;
 }
 
-TEST(TSet, throws_when_insert_non_existing_element_out_of_range_using_plus_operator)
+TSet TSet::operator+(const int Elem) // объединение с элементом
 {
-  const int size = 4;
-  const int k = 6;
-  TSet set(size), updatedSet(size);
-  set.InsElem(0);
-  set.InsElem(2);
-
-  ASSERT_ANY_THROW(updatedSet = set + k);
+	TSet b = *this;
+	b.BitField.SetBit(Elem);
+	return b;
 }
 
-TEST(TSet, can_insert_existing_element_using_plus_operator)
+TSet TSet::operator-(const int Elem) // разность с элементом
 {
-  const int size = 4;
-  const int k = 3;
-  TSet set(size), updatedSet(size);
-  set.InsElem(0);
-  set.InsElem(k);
-  updatedSet = set + k;
-
-  EXPECT_NE(0, set.IsMember(k));
+	TSet b = *this;
+	b.BitField.ClrBit(Elem);
+	return b;
 }
 
-TEST(TSet, check_size_of_the_combination_of_two_sets_of_equal_size)
+TSet TSet::operator*(const TSet &s) // пересечение
 {
-  const int size = 5;
-  TSet set1(size), set2(size), set3(size);
-  // set1 = {1, 2, 4}
-  set1.InsElem(1);
-  set1.InsElem(2);
-  set1.InsElem(4);
-  // set2 = {0, 1, 2}
-  set2.InsElem(0);
-  set2.InsElem(1);
-  set2.InsElem(2);
-  set3 = set1 + set2;
-
-  EXPECT_EQ(size, set3.GetMaxPower());
+	TSet b(1);
+	b.BitField = BitField & s.BitField;
+	b.MaxPower = b.BitField.GetLength();
+	return b;
 }
 
-TEST(TSet, can_combine_two_sets_of_equal_size)
+TSet TSet::operator~(void) // дополнение
 {
-  const int size = 5;
-  TSet set1(size), set2(size), set3(size), expSet(size);
-  // set1 = {1, 2, 4}
-  set1.InsElem(1);
-  set1.InsElem(2);
-  set1.InsElem(4);
-  // set2 = {0, 1, 2}
-  set2.InsElem(0);
-  set2.InsElem(1);
-  set2.InsElem(2);
-  set3 = set1 + set2;
-  // expSet = {0, 1, 2, 4}
-  expSet.InsElem(0);
-  expSet.InsElem(1);
-  expSet.InsElem(2);
-  expSet.InsElem(4);
-
-  EXPECT_EQ(expSet, set3);
+	TSet b = *this;
+	b.BitField = ~BitField;
+	return b;
 }
 
-TEST(TSet, check_size_changes_of_the_combination_of_two_sets_of_non_equal_size)
-{
-  const int size1 = 5, size2 = 7;
-  TSet set1(size1), set2(size2), set3(size1);
-  // set1 = {1, 2, 4}
-  set1.InsElem(1);
-  set1.InsElem(2);
-  set1.InsElem(4);
-  // set2 = {0, 1, 2}
-  set2.InsElem(0);
-  set2.InsElem(1);
-  set2.InsElem(2);
-  set3 = set1 + set2;
+// перегрузка ввода/вывода
 
-  EXPECT_EQ(size2, set3.GetMaxPower());
+istream &operator>>(istream &istr, TSet &s) // ввод
+{
+	cout << "-1 = END" << endl;
+	int a;
+	istr >> a;
+	while (a > 0)
+	{
+		s.InsElem(a);
+		istr >> a;
+	}
+	return istr;
 }
 
-TEST(TSet, can_combine_two_sets_of_non_equal_size)
+ostream& operator<<(ostream &ostr, const TSet &s) // вывод
 {
-  const int size1 = 5, size2 = 7;
-  TSet set1(size1), set2(size2), set3(size1), expSet(size2);
-  // set1 = {1, 2, 4}
-  set1.InsElem(1);
-  set1.InsElem(2);
-  set1.InsElem(4);
-  // set2 = {0, 1, 2, 6}
-  set2.InsElem(0);
-  set2.InsElem(1);
-  set2.InsElem(2);
-  set2.InsElem(6);
-  set3 = set1 + set2;
-  // expSet = {0, 1, 2, 4, 6}
-  expSet.InsElem(0);
-  expSet.InsElem(1);
-  expSet.InsElem(2);
-  expSet.InsElem(4);
-  expSet.InsElem(6);
-
-  EXPECT_EQ(expSet, set3);
-}
-
-TEST(TSet, can_intersect_two_sets_of_equal_size)
-{
-  const int size = 5;
-  TSet set1(size), set2(size), set3(size), expSet(size);
-  // set1 = {1, 2, 4}
-  set1.InsElem(1);
-  set1.InsElem(2);
-  set1.InsElem(4);
-  // set2 = {0, 1, 2}
-  set2.InsElem(0);
-  set2.InsElem(1);
-  set2.InsElem(2);
-  set3 = set1 * set2;
-  // expSet = {1, 2}
-  expSet.InsElem(1);
-  expSet.InsElem(2);
-
-  EXPECT_EQ(expSet, set3);
-}
-
-TEST(TSet, can_intersect_two_sets_of_non_equal_size)
-{
-  const int size1 = 5, size2 = 7;
-  TSet set1(size1), set2(size2), set3(size1), expSet(size2);
-  // set1 = {1, 2, 4}
-  set1.InsElem(1);
-  set1.InsElem(2);
-  set1.InsElem(4);
-  // set2 = {0, 1, 2, 4, 6}
-  set2.InsElem(0);
-  set2.InsElem(1);
-  set2.InsElem(2);
-  set2.InsElem(4);
-  set2.InsElem(6);
-  set3 = set1 * set2;
-  // expSet = {1, 2, 4}
-  expSet.InsElem(1);
-  expSet.InsElem(2);
-  expSet.InsElem(4);
-
-  EXPECT_EQ(expSet, set3);
-}
-
-TEST(TSet, check_negation_operator)
-{
-  const int size = 4;
-  TSet set(size), set1(size), expSet(size);
-  // set1 = {1, 3}
-  set.InsElem(1);
-  set.InsElem(3);
-  set1 = ~set;
-  // expSet = {0, 2}
-  expSet.InsElem(0);
-  expSet.InsElem(2);
-
-  EXPECT_EQ(expSet, set1);
+	ostr << "{";
+	for (int i = 0; i < s.MaxPower; i++)
+	{
+		if (s.IsMember(i) == 1)
+			ostr << " " << i;
+	}
+	ostr << " }";
+	return ostr;
 }

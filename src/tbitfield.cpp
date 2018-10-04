@@ -9,7 +9,7 @@
 
 TBitField::TBitField(int len)
 {
-    if(len % sizeof(TELEM) == 0)
+    if( (len % sizeof(TELEM)) == 0)
         MemLen = len / sizeof(TELEM);
     else
         MemLen = len / sizeof(TELEM) + 1;
@@ -17,6 +17,9 @@ TBitField::TBitField(int len)
     BitLen = len;
     
     pMem = new TELEM[MemLen];
+
+	for (int i = 0; i < MemLen; i++)
+		pMem[i] = 0;
 }
 
 TBitField::TBitField(const TBitField &bf) // конструктор копирования
@@ -43,8 +46,8 @@ TBitField::~TBitField()
 
 int TBitField::GetMemIndex(const int n) const // индекс Мем для бита n
 {
-    if ( (n > this->BitLen) || (n <= 0) )
-        return -1; // Ошибка, если бита с таким номером нет в массиве или он неположительный
+    if ( (n >= this->BitLen) || (n < 0) )
+        throw (-1); // Ошибка, если бита с таким номером нет в массиве или он неположительный
     return (n/sizeof(TELEM));
 }
 
@@ -65,6 +68,9 @@ int TBitField::GetLength(void) const // получить длину (к-во б�
 
 void TBitField::SetBit(const int n) // установить бит
 {
+	if ((n < 0) || (n >= BitLen))
+		throw (-1);
+
     TELEM tMask = GetMemMask(n);
     
     if ( (pMem[GetMemIndex(n)] & tMask) == 0 )
@@ -73,6 +79,9 @@ void TBitField::SetBit(const int n) // установить бит
 
 void TBitField::ClrBit(const int n) // очистить бит
 {
+	if ((n < 0) || (n >= BitLen))
+		throw (-1);
+
     TELEM tMask = GetMemMask(n);
     
     if ( (pMem[GetMemIndex(n)] & tMask) != 0 ) // бит == 1
@@ -81,6 +90,9 @@ void TBitField::ClrBit(const int n) // очистить бит
 
 int TBitField::GetBit(const int n) const // получить значение бита
 {
+	if ( (n < 0) || (n >= BitLen) )
+		throw (-1);
+
     if( (pMem[GetMemIndex(n)] & GetMemMask(n)) != 0 ) // бит == 1
         return 1;
     return 0;
@@ -92,14 +104,19 @@ TBitField& TBitField::operator=(const TBitField &bf) // присваивание
 {
     if (this != &bf) // &bf возвращает адрес объекта
     {
-        BitLen = bf.BitLen;
-        
-        MemLen = bf.MemLen;
-        
-        pMem = new TELEM[MemLen];
-        
-        for (int i = 0; i < MemLen; i++)
-            pMem[i] = bf.pMem[i];
+		BitLen = bf.BitLen;
+
+		if (MemLen != bf.MemLen)
+		{
+			delete[] pMem;
+			MemLen = bf.MemLen;
+			pMem = new TELEM[MemLen];
+		}
+
+        /* for (int i = 0; i < MemLen; i++)
+            pMem[i] = bf.pMem[i]; */
+
+		copy(bf.pMem, bf.pMem + MemLen, pMem);
     }
     
     return(*this);

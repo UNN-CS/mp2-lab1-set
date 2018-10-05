@@ -295,3 +295,8 @@ TEST(TSet, check_negation_operator)
 
   EXPECT_EQ(expSet, set1);
 }
+
+TEST (TSet, throws_when_create_tset_with_negative_maxpower)
+{
+	ASSERT_ANY_THROW(TSet st(-1));
+}

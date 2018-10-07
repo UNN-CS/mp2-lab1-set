@@ -113,10 +113,10 @@ TBitField& TBitField::operator=(const TBitField &bf) // присваивание
 			pMem = new TELEM[MemLen];
 		}
 
-        /* for (int i = 0; i < MemLen; i++)
-            pMem[i] = bf.pMem[i]; */
+        for (int i = 0; i < MemLen; i++)
+            pMem[i] = bf.pMem[i];
 
-		copy(bf.pMem, bf.pMem + MemLen, pMem);
+		// copy(bf.pMem, bf.pMem + MemLen, pMem);
     }
     
     return(*this);
@@ -148,54 +148,72 @@ int TBitField::operator!=(const TBitField &bf) const // сравнение
 
 TBitField TBitField::operator|(const TBitField &bf) // операция "или"
 {
-    int Maxlen = (BitLen > bf.BitLen) ? BitLen : bf.BitLen;
-    TBitField Temp(Maxlen);
-    for (int i = 0; i < ( (BitLen > bf.BitLen) ? bf.BitLen : BitLen ); i++)
-        if (GetBit(i) || bf.GetBit(i))
-            Temp.SetBit(i);
-        else
-            Temp.ClrBit(i);
-            
-    if (BitLen > bf.BitLen)
-        for (int j = bf.BitLen - 1; j < BitLen; j++)
-            if(GetBit(j))
-                Temp.SetBit(j);
-            else
-                Temp.ClrBit(j);
-    if (BitLen < bf.BitLen)
-        for (int k = BitLen - 1; k < bf.BitLen; k++)
-            if(bf.GetBit(k))
-                Temp.SetBit(k);
-            else
-                Temp.ClrBit(k);
-                
-    return Temp;
+	TBitField Temp( (BitLen > bf.BitLen) ? (*this) : bf );
+
+	int len1 = BitLen;
+	int len2 = bf.BitLen;
+
+	for (int i = 0; (len1 / sizeof(TELEM) >= 1) && (len2 / sizeof(TELEM) >= 1); len1 -= sizeof(TELEM))
+	{
+		Temp.pMem[i] = pMem[i] | bf.pMem[i];
+
+		len2 -= sizeof(TELEM);
+	}
+
+	int j = Temp.BitLen;
+
+	if (BitLen >= bf.BitLen)
+	{
+		for (j = bf.BitLen - len2; j < bf.BitLen; j++)
+			if (GetBit(j) || bf.GetBit(j))
+				Temp.SetBit(j);
+	}
+	else
+	{
+		for (j = BitLen - len1; j < BitLen; j++)
+			if (GetBit(j) || bf.GetBit(j))
+				Temp.SetBit(j);
+	}
+	return Temp;
 }
 
 TBitField TBitField::operator&(const TBitField &bf) // операция "и"
 {
-    int Maxlen = (BitLen > bf.BitLen) ? BitLen : bf.BitLen;
-    TBitField Temp(Maxlen);
-    for (int i = 0; i < ( (BitLen > bf.BitLen) ? bf.BitLen : BitLen ); i++)
-        if (GetBit(i) && bf.GetBit(i))
-            Temp.SetBit(i);
-        else
-            Temp.ClrBit(i);
-            
-    if (BitLen > bf.BitLen)
-        for (int j = bf.BitLen - 1; j < BitLen; j++)
-            if(GetBit(j))
-                Temp.SetBit(j);
-            else
-                Temp.ClrBit(j);
-    if (BitLen < bf.BitLen)
-        for (int k = BitLen - 1; k < bf.BitLen; k++)
-            if(bf.GetBit(k))
-                Temp.SetBit(k);
-            else
-                Temp.ClrBit(k);
-                
-    return Temp;
+	int Maxlen = (BitLen > bf.BitLen) ? BitLen : bf.BitLen;
+	TBitField Temp(Maxlen);
+
+	int len1 = BitLen;
+	int len2 = bf.BitLen;
+
+	for (int i = 0; (len1 / sizeof(TELEM) >= 1) && (len2 / sizeof(TELEM) >= 1); len1 -= sizeof(TELEM))
+	{
+		Temp.pMem[i] = pMem[i] & bf.pMem[i];
+
+		len2 -= sizeof(TELEM);
+	}
+
+	int j = Maxlen;
+
+	if (BitLen >= bf.BitLen)
+	{
+		for (j = bf.BitLen - len2; j < bf.BitLen; j++)
+			if (GetBit(j) && bf.GetBit(j))
+				Temp.SetBit(j);
+	}
+	else
+	{
+		for (j = BitLen - len1; j < BitLen; j++)
+			if (GetBit(j) && bf.GetBit(j))
+				Temp.SetBit(j);
+	}
+
+	while (j < Maxlen)
+	{
+		Temp.ClrBit(j);
+		j++;
+	}
+
+	return Temp;
 }
 
 TBitField TBitField::operator~(void) // отрицание
@@ -232,7 +250,7 @@ istream &operator>>(istream &istr, TBitField &bf) // ввод
 
 ostream &operator<<(ostream &ostr, const TBitField &bf) // вывод
 {
-    for (int i = 0; i < bf.GetLength(); i++)
+	for (int i = bf.GetLength() - 1; i >= 0; i--)
         ostr << bf.GetBit(i) << " ";
     
     ostr << endl;

@@ -26,7 +26,12 @@ TBitField::TBitField(int len)
 	BitLen = len;
 
 	MemLen = ceil(float(len) / TELEMsz);
-	pMem = new TELEM[MemLen]{ 0 };
+	pMem = new TELEM[MemLen];
+
+	for (int i = 0; i < MemLen; i++)
+	{
+		pMem[i] = 0;
+	}
 
 }
 
@@ -135,6 +140,8 @@ int TBitField::GetBit(const int n) const // получить значение б
 
 TBitField& TBitField::operator=(const TBitField &bf) // присваивание
 {
+	if (&bf == this) return *this;
+
 	BitLen = bf.BitLen;
 
 	if (MemLen != bf.MemLen)

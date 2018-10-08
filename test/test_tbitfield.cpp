@@ -1,6 +1,23 @@
 #include "tbitfield.h"
 
 #include <gtest.h>
+TEST(TBitField, can_create_bitfield_with_positive_length)
+{
+  ASSERT_NO_THROW(TBitField bf(2));
+}
+
+TEST(TBitField, can_get_length)
+{
+  TBitField bf(2);
+
+  EXPECT_EQ(3, bf.GetLength());
+}
+TEST(TBitField, false_when_set_bit_with_negative_index)
+{
+  TBitField bf(6);
+
+  ASSERT_ANY_THROW(bf.SetBit(-2));
+}
 
 TEST(TBitField, can_create_bitfield_with_positive_length)
 {

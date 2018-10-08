@@ -4,6 +4,31 @@
 
 TEST(TBitField, can_create_bitfield_with_positive_length)
 {
+  ASSERT_NO_THROW(TBitField bf(5));
+}
+
+TEST(TBitField, can_get_length)
+{
+  TBitField bf(6);
+
+  EXPECT_EQ(6, bf.GetLength());
+}
+
+TEST(TBitField, new_bitfield_is_set_to_zero)
+{
+  TBitField bf(200);
+
+  int sum = 0;
+  for (int i = 0; i < bf.GetLength(); i++)
+  {
+    sum += bf.GetBit(i);
+  }
+
+  EXPECT_EQ(0, sum);
+}
+
+TEST(TBitField, can_create_bitfield_with_positive_length)
+{
   ASSERT_NO_THROW(TBitField bf(3));
 }
 
@@ -308,17 +333,4 @@ TEST(TBitField, bitfields_with_different_bits_are_not_equal)
   bf2.SetBit(2);
 
   EXPECT_NE(bf1, bf2);
-}
-
-TEST(TBitField, bitfields_with_first_equal_bits_and_different_length_are_not_equal)
-{
-	TBitField b1(6), b2(5);
-	b1.SetBit(3);
-	b2.SetBit(3);
-	EXPECT_NE(b1, b2);
-}
-TEST(TBitField, two_inversions_are_equal_to_original)
-{
-	TBitField b(35);
-	ASSERT_EQ(b, ~~b);
 }

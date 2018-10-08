@@ -1,6 +1,27 @@
 #include "tset.h"
-
 #include <gtest.h>
+
+TEST(TSet, check_test_sum)
+{
+	const int size = 5;
+	TSet set1(size), set2(size), set3(size);
+
+	set1.InsElem(1);
+	set1.InsElem(2);
+	set1.InsElem(4);
+
+	set3 = set2 = set1;
+
+	EXPECT_EQ(set1, set1 + set2 + set3);
+}
+
+TEST(TBitField, throws_when_IsMember_with_too_large_index)
+{
+	TSet s(10);
+
+	ASSERT_ANY_THROW(s.IsMember(11));
+
+}
 
 TEST(TSet, can_get_max_power_set)
 {
@@ -294,4 +315,5 @@ TEST(TSet, check_negation_operator)
   expSet.InsElem(2);
 
   EXPECT_EQ(expSet, set1);
+
 }

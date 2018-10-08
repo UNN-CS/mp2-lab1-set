@@ -1,23 +1,6 @@
 #include "tbitfield.h"
 
 #include <gtest.h>
-TEST(TBitField, can_create_bitfield_with_positive_length)
-{
-  ASSERT_NO_THROW(TBitField bf(2));
-}
-
-TEST(TBitField, can_get_length)
-{
-  TBitField bf(2);
-
-  EXPECT_EQ(3, bf.GetLength());
-}
-TEST(TBitField, false_when_set_bit_with_negative_index)
-{
-  TBitField bf(6);
-
-  ASSERT_ANY_THROW(bf.SetBit(-2));
-}
 
 TEST(TBitField, can_create_bitfield_with_positive_length)
 {
@@ -325,4 +308,17 @@ TEST(TBitField, bitfields_with_different_bits_are_not_equal)
   bf2.SetBit(2);
 
   EXPECT_NE(bf1, bf2);
+}
+
+TEST(TBitField, bitfields_with_first_equal_bits_and_different_length_are_not_equal)
+{
+	TBitField b1(6), b2(5);
+	b1.SetBit(3);
+	b2.SetBit(3);
+	EXPECT_NE(b1, b2);
+}
+TEST(TBitField, two_inversions_are_equal_to_original)
+{
+	TBitField b(35);
+	ASSERT_EQ(b, ~~b);
 }

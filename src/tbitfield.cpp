@@ -9,6 +9,9 @@
 
 TBitField::TBitField(int len)
 {
+	if (len < 1)
+		throw(-1);
+
     if( (len % sizeof(TELEM)) == 0)
         MemLen = len / sizeof(TELEM);
     else

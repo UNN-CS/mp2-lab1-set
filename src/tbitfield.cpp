@@ -10,8 +10,8 @@
 TBitField::TBitField(int len)
 {
     BitLen = len;
-    MemLen = BitLen div (8 * sizeof(TELEM));
-    if (BitLen mod (8 * sizeof(TELEM)) <> 0)
+    MemLen = BitLen / (8 * sizeof(TELEM));
+    if (BitLen % (8 * sizeof(TELEM) > 0))
         MemLen++;
     pMem = new TELEM[MemLen];
     for (int i = 0; i < MemLen; i++)
@@ -44,7 +44,7 @@ int TBitField::GetMemIndex(const int n) const // индекс Мем для би
 
 TELEM TBitField::GetMemMask(const int n) const // битовая маска для бита n
 {
-    return (1 << (n % (sizeof(TELEM) * 8));
+    return (1 << (n % (sizeof(TELEM) * 8)));
 }
 
 // доступ к битам битового поля
@@ -96,7 +96,7 @@ int TBitField::operator==(const TBitField &bf) const // сравнение
 {
     if (BitLen != bf.BitLen)
         return 0;
-    for (int i = 0; i < MemLen: i++)
+    for (int i = 0; i < MemLen; i++)
         if (pMem[i] != bf.pMem[i])
             return 0;
     return 1;
@@ -106,7 +106,7 @@ int TBitField::operator!=(const TBitField &bf) const // сравнение
 {
       if (BitLen != bf.BitLen)
         return 1;
-    for (int i = 0; i < MemLen: i++)
+    for (int i = 0; i < MemLen; i++)
         if (pMem[i] != bf.pMem[i])
             return 1;
     return 0;
@@ -137,7 +137,7 @@ TBitField TBitField::operator|(const TBitField &bf) // операция "или"
     }
     for (int i = MinMem; i < Mem; i++)
     {
-        tmp.pMem[i] = p[i]
+		tmp.pMem[i] = p[i];
     }
     p = NULL;
     return tmp;
@@ -174,10 +174,30 @@ TBitField TBitField::operator~(void) // отрицание
 
 istream &operator>>(istream &istr, TBitField &bf) // ввод
 {
-
+    int i = 0;
+	char ch;
+	do
+    {
+		istr >> ch;
+	}
+	while (ch != ' ');
+	while (1)
+    {
+		istr >> ch;
+		if (ch == '0')
+            bf.ClrBit(i++);
+		else if (ch == '1')
+            bf.SetBit(i++);
+		else break;
+    }
+	return istr;
 }
 
 ostream &operator<<(ostream &ostr, const TBitField &bf) // вывод
 {
-
+    int len = bf.GetLength();
+    for (int i = 0; i++; i < len)
+        if (bf.GetBit(i)) ostr << '1';
+        else ostr << '0';
+    return ostr;
 }

@@ -83,7 +83,7 @@ TEST(TSet, compare_two_non_equal_sets)
   set2.InsElem(1);
   set2.InsElem(2);
 
-  EXPECT_EQ(1, set1 != set2);
+  EXPECT_TRUE(set1 != set2);
 }
 
 TEST(TSet, can_assign_set_of_equal_size)

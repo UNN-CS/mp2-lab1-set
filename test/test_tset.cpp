@@ -6,7 +6,7 @@ TEST(TSet, can_get_max_power_set)
 {
   const int size = 5;
   TSet set(size);
-
+ 
   EXPECT_EQ(size, set.GetMaxPower());
 }
 
@@ -294,4 +294,18 @@ TEST(TSet, check_negation_operator)
   expSet.InsElem(2);
 
   EXPECT_EQ(expSet, set1);
+}
+
+TEST(TSet, can_delete_existing_elem)
+{
+	const int size = 4;
+	TSet set(size), expSet(size);
+	// set = {1,3}
+	set.InsElem(1);
+	set.InsElem(3);
+	set = set - 3;
+	// expSet = {0, 2}
+	expSet.InsElem(1);
+
+	EXPECT_EQ(expSet, set);
 }

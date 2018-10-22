@@ -295,3 +295,22 @@ TEST(TSet, check_negation_operator)
 
   EXPECT_EQ(expSet, set1);
 }
+
+TEST(TSet, can_work_operator_and_with_multiple_sets)
+{
+	TSet set1(5), set2(6), set3(7);
+	set1 = ~set1;
+	set2.InsElem(0);
+	set3.InsElem(0);
+	EXPECT_NE(0, (set1 * set2 * set3).IsMember(0));
+}
+
+TEST(TSet, can_work_operator_or_with_multiple_sets)
+{
+	TSet set1(5), set2(6), set3(7), set4(7);
+	set1.InsElem(0);
+	set2.InsElem(1);
+	set3.InsElem(2);
+	set4 = set1 + set2 + set3;
+	EXPECT_EQ(1, set4.IsMember(0) && set4.IsMember(1) && set4.IsMember(2));
+}

@@ -309,3 +309,22 @@ TEST(TBitField, bitfields_with_different_bits_are_not_equal)
 
   EXPECT_NE(bf1, bf2);
 }
+
+TEST(TBitField, can_work_operator_and_with_multiple_bitfields)
+{
+    TBitField bf1(5), bf2(6), bf3(7);
+    bf1 = ~bf1;
+    bf2.SetBit(1);
+    bf3.SetBit(1);
+	EXPECT_NE(0, (bf1 & bf2 & bf3).GetBit(1));
+}
+
+TEST(TBitField, can_work_operator_or_with_multiple_bitfields)
+{
+	TBitField bf1(5), bf2(6), bf3(7), bf4(7);
+	bf1.SetBit(3);
+	bf2.SetBit(2);
+	bf3.SetBit(1);
+	bf4 = (bf1 | bf2 | bf3);
+	EXPECT_EQ(1, bf4.GetBit(1) && bf4.GetBit(2) && bf4.GetBit(3));
+}

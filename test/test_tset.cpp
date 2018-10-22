@@ -295,3 +295,26 @@ TEST(TSet, check_negation_operator)
 
   EXPECT_EQ(expSet, set1);
 }
+
+TEST(TSet, true_double_insert_operation)
+{
+	const int size = 8;
+	TSet set1(size);
+	
+	set1.InsElem(4);
+	set1.InsElem(4);
+	
+	EXPECT_EQ(1, set1.IsMember(4));
+}
+
+TEST(TSet, true_double_delete_operation)
+{
+	const int size = 8;
+	TSet set1(size);
+	
+	set1.InsElem(3);
+	set1.DelElem(3);
+	set1.DelElem(3);
+	
+	EXPECT_EQ(0, set1.IsMember(3));
+}

@@ -295,3 +295,32 @@ TEST(TSet, check_negation_operator)
 
   EXPECT_EQ(expSet, set1);
 }
+
+TEST(TSet, can_combine_three_sets_of_non_equal_size_MY_TEST)
+{
+	const int size1 = 5, size2 = 7, size3 = 8;
+	TSet set1(size1), set2(size2), set3(size3), set4(size1), expSet(size3);
+	// set1 = {1, 2, 4}
+	set1.InsElem(1);
+	set1.InsElem(2);
+	set1.InsElem(4);
+	// set2 = {0, 1, 2, 6}
+	set2.InsElem(0);
+	set2.InsElem(1);
+	set2.InsElem(2);
+	set2.InsElem(6);
+	// set3 = {0, 1, 7}
+	set3.InsElem(0);
+	set3.InsElem(1);
+	set3.InsElem(7);
+	set4 = set1 + set2 + set3;
+	// expSet = {0, 1, 2, 4, 6, 7}
+	expSet.InsElem(0);
+	expSet.InsElem(1);
+	expSet.InsElem(2);
+	expSet.InsElem(4);
+	expSet.InsElem(6);
+	expSet.InsElem(7);
+
+	EXPECT_EQ(expSet, set4);
+}

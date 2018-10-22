@@ -2,6 +2,25 @@
 
 #include <gtest.h>
 
+TEST(TSet, can_alex)
+{
+  const int size = 5, k = 3;
+  TSet set(size);
+
+  set.InsElem(k);
+  EXPECT_GT(set.IsMember(k), 0);
+
+  set = set-k;
+  EXPECT_EQ(set.IsMember(k), 0);
+}
+
+TEST(TSet, can_without_no_throw)
+{
+  const int size = 5;
+
+  EXPECT_NO_THROW(TSet set(size));
+}
+
 TEST(TSet, can_get_max_power_set)
 {
   const int size = 5;

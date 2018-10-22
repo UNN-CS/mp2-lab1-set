@@ -309,3 +309,16 @@ TEST(TBitField, bitfields_with_different_bits_are_not_equal)
 
   EXPECT_NE(bf1, bf2);
 }
+
+TEST(TBitField, bitfields_with_first_equal_bits_and_different_length_are_not_equal)
+{
+	TBitField b1(6), b2(5);
+	b1.SetBit(3);
+	b2.SetBit(3);
+	EXPECT_NE(b1, b2);
+}
+TEST(TBitField, two_inversions_are_equal_to_original)
+{
+	TBitField b(35);
+	ASSERT_EQ(b, ~~b);
+}

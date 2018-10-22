@@ -309,3 +309,39 @@ TEST(TBitField, bitfields_with_different_bits_are_not_equal)
 
   EXPECT_NE(bf1, bf2);
 }
+
+TEST (TBitField, copied_bitfild_has_its_own_memory)
+{
+	const int size1 = 3, size2 = 5;
+	TBitField bf1(size1), bf2(size2);
+	bf1 = bf2;
+	bf1.SetBit(3);
+
+	EXPECT_NE(bf1, bf2);
+}
+
+TEST(TBitField, compare_equal_bitfields_of_not_equal_size)
+{
+  const int size1 = 2, size2 = 3;
+  TBitField bf1(size1), bf2(size2);
+
+  EXPECT_EQ(bf1, bf2);
+}
+
+TEST(TBitField, compare_not_equal_bitfields_of_not_equal_size)
+{
+  const int size1 = 2, size2 = 3;
+  TBitField bf1(size1), bf2(size2);
+  bf2.SetBit(2);
+
+  EXPECT_NE(bf1, bf2);
+}
+
+TEST(TBitField, no_throws_when_clear_bit_twice)
+{
+	TBitField bf(5);
+	bf.SetBit(2);
+	bf.ClrBit(2);
+
+	ASSERT_NO_THROW (bf.ClrBit(2));
+}

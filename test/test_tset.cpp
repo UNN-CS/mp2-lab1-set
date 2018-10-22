@@ -295,3 +295,9 @@ TEST(TSet, check_negation_operator)
 
   EXPECT_EQ(expSet, set1);
 }
+TEST(TSet, throw_when_delete_element_with_negative_index)
+{
+	const int size = 5;
+	TSet set1(size);
+	ASSERT_ANY_THROW(set1.DelElem(-3));
+ }

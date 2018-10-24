@@ -295,3 +295,7 @@ TEST(TSet, check_negation_operator)
 
   EXPECT_EQ(expSet, set1);
 }
+TEST(TSet, pause)
+{
+	system("pause");
+}

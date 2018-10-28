@@ -6,6 +6,7 @@
 // Множество - реализация через битовые поля
 
 #include "tset.h"
+#include <algorithm>
 
 TSet::TSet(int mp) : BitField(mp)
 {
@@ -63,20 +64,17 @@ TSet& TSet::operator=(const TSet &s) // присваивание
 
 int TSet::operator==(const TSet &s) const // сравнение
 {
-	if (MaxPower == s.MaxPower)
-	{
-		return BitField.operator==(s.BitField);
-	}
-    return 0;
+		return (BitField==s.BitField);	
 }
 
 int TSet::operator!=(const TSet &s) const // сравнение
 {
-	if (MaxPower == s.MaxPower)
-	{
-		return BitField.operator!=(s.BitField);
-	}
-	return 1;
+	if (MaxPower != s.MaxPower)
+		return 1;
+	else
+		if (BitField != s.BitField)
+			return 1;
+	return 0;
 }
 
 TSet TSet::operator+(const TSet &s) // объединение
@@ -101,15 +99,17 @@ TSet TSet::operator-(const int Elem) // разность с элементом
 
 TSet TSet::operator*(const TSet &s) // пересечение
 {
-	TSet t(BitField.operator&(s.BitField));
-	return t;
+	TSet tmp(0);
+	tmp.MaxPower = max(MaxPower, s.MaxPower);
+	tmp.BitField = BitField & s.BitField;
+	return tmp;
 }
 
 TSet TSet::operator~(void) // дополнение
 {
-	//TSet t(~BitField);        ???
-	TSet t(BitField.operator~);
-	return t;
+	TSet temp=*this;
+	temp.BitField = ~temp.BitField;
+	return temp;
 }
 
 // перегрузка ввода/вывода

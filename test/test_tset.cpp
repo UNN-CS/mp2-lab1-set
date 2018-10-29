@@ -295,3 +295,14 @@ TEST(TSet, check_negation_operator)
 
   EXPECT_EQ(expSet, set1);
 }
+
+TEST(TSet, can_create_set_with_negative_maxpower)
+{
+
+	EXPECT_ANY_THROW(TSet b(-1));
+}
+TEST(TSet, can_create_set_with_zero_maxpower)
+{
+
+	EXPECT_ANY_THROW(TSet b(0));
+}

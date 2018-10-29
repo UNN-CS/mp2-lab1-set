@@ -309,3 +309,14 @@ TEST(TBitField, bitfields_with_different_bits_are_not_equal)
 
   EXPECT_NE(bf1, bf2);
 }
+
+TEST(TBitField, can_create_bitfield_with_zero_length)
+{
+
+	EXPECT_ANY_THROW(TBitField b(0));
+}
+TEST(TBitField, can_create_bitfield_with_negative_length)
+{
+
+	EXPECT_ANY_THROW(TBitField b(-5));
+}

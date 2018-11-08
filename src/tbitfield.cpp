@@ -32,8 +32,6 @@ TBitField::TBitField(const TBitField &bf) // конструктор копиро
 {
 	if (&bf != this)
 		{
-			/*delete[] pMem; //очистка исходного объекта
-			pMem = NULL;*/
 			BitLen = bf.BitLen; MemLen = bf.MemLen;
 			pMem = new TELEM[MemLen];// создать новый массив
 			for (int i = 0; i < MemLen; i++)
@@ -96,7 +94,7 @@ int TBitField::GetBit(const int n) const // получить значение б
 
 TBitField& TBitField::operator=(const TBitField &bf) // присваивание   (объект уже был создан)
 {                                                           
-	if (&bf != this) //////??? одинаковые длины заносить будем? ?????????????????????????????????????????
+	if (&bf != this) 
 	{
 		delete[] pMem; //очистка исходного объекта
 		pMem = NULL;

@@ -309,3 +309,105 @@ TEST(TBitField, bitfields_with_different_bits_are_not_equal)
 
   EXPECT_NE(bf1, bf2);
 }
+
+TEST(TBitField, can_clear_bit_twice )
+{
+	TBitField bf(10);
+
+	int bitIdx = 3;
+
+	bf.SetBit(bitIdx);
+	EXPECT_NE(0, bf.GetBit(bitIdx));
+
+	bf.ClrBit(bitIdx);
+	EXPECT_EQ(0, bf.GetBit(bitIdx));
+
+	bf.ClrBit(bitIdx);
+	EXPECT_EQ(0, bf.GetBit(bitIdx));
+
+}
+/*
+Убедиться, что если взять три битовых поля, 
+и выполнить на них битовую операцию в одну строку(например bf1 | bf2 | bf3), то получается корректный результат  */
+
+TEST(TBitField, can_bf1_or_bf2_or_bf3)
+{
+	TBitField bf1(10);
+	TBitField bf2(10);
+	TBitField bf3(10);
+
+	int bitIdx1 = 3;
+	int bitIdx2 = 4;
+	int bitIdx3 = 5;
+
+	bf1.SetBit(bitIdx1);
+	EXPECT_NE(0, bf1.GetBit(bitIdx1));
+
+	bf2.SetBit(bitIdx2);
+	EXPECT_NE(0, bf2.GetBit(bitIdx2));
+
+	bf3.SetBit(bitIdx3);
+	EXPECT_NE(0, bf3.GetBit(bitIdx3));
+
+	TBitField res(bf1 | bf2 | bf3);
+	TBitField exp(10);
+	exp.SetBit(bitIdx1);
+	exp.SetBit(bitIdx2);
+	exp.SetBit(bitIdx3);
+	
+	EXPECT_EQ(exp,res);
+}
+
+TEST(TBitField, can_bf1_and_bf2_and_bf3_dif)
+{
+	TBitField bf1(10);
+	TBitField bf2(10);
+	TBitField bf3(10);
+
+	int bitIdx1 = 3;
+	int bitIdx2 = 4;
+	int bitIdx3 = 5;
+
+	bf1.SetBit(bitIdx1);
+	EXPECT_NE(0, bf1.GetBit(bitIdx1));
+
+	bf2.SetBit(bitIdx2);
+	EXPECT_NE(0, bf2.GetBit(bitIdx2));
+
+	bf3.SetBit(bitIdx3);
+	EXPECT_NE(0, bf3.GetBit(bitIdx3));
+
+	TBitField res(bf1 & bf2 & bf3);
+	TBitField exp(10);
+	
+	EXPECT_EQ(exp, res);
+}
+
+TEST(TBitField, can_bf1_and_bf2_and_bf3_same)
+{
+	TBitField bf1(10);
+	TBitField bf2(10);
+	TBitField bf3(10);
+
+	int bitIdx = 3;
+	
+	bf1.SetBit(bitIdx);
+	EXPECT_NE(0, bf1.GetBit(bitIdx));
+
+	bf2.SetBit(bitIdx);
+	EXPECT_NE(0, bf2.GetBit(bitIdx));
+
+	bf3.SetBit(bitIdx);
+	EXPECT_NE(0, bf3.GetBit(bitIdx));
+
+	TBitField res(bf1 & bf2 & bf3);
+	TBitField exp(10);
+
+	exp.SetBit(bitIdx);
+	EXPECT_NE(0, exp.GetBit(bitIdx));
+
+	EXPECT_EQ(exp, res);
+}
+
+
+

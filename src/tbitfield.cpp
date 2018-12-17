@@ -7,8 +7,16 @@
 
 #include "tbitfield.h"
 
-TBitField::TBitField(int len)
+TBitField::TBitField(int len)//конструктор
 {
+  if (len<0) throw "Error value";
+  MemLen=(len+31)>>5; //в эл-те pMem 32 бит (TELEM==int)
+  pMem=new TELEM[MemLen];
+  if (pMem!= NULL)
+  for (int i=0;i<MemLen;i++) 
+  {
+    pMem[i]=0;
+    }
 }
 
 TBitField::TBitField(const TBitField &bf) // конструктор копирования
@@ -17,6 +25,8 @@ TBitField::TBitField(const TBitField &bf) // конструктор копиро
 
 TBitField::~TBitField()
 {
+  delete pMem;
+  pMem=NULL;
 }
 
 int TBitField::GetMemIndex(const int n) const // индекс Мем для бита n

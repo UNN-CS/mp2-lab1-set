@@ -22,7 +22,7 @@ TBitField::TBitField(int len)
 		pMem[i] = 0;
 }
 
-TBitField::TBitField(const TBitField &bf) // ęîíńňđóęňîđ ęîďčđîâŕíč˙
+TBitField::TBitField(const TBitField &bf) 
 {
 	BitLen = bf.BitLen;
 	MemLen = bf.MemLen;

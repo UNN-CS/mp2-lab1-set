@@ -145,4 +145,12 @@ ostream& operator<<(ostream &ostr, const TSet &s) // вывод
 	}
 	if(f) ostr<<"Пустое множество";
 	return ostr;
+<<<<<<< HEAD
 }
+=======
+<<<<<<< HEAD
+}
+=======
+}
+>>>>>>> fd8649f96a184ed262dd1aab6e5f32eddf50e9c7
+>>>>>>> d2aeda11f914a428afdea9384c5ffdaebe877fe5

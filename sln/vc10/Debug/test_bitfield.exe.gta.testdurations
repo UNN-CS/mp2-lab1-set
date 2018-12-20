@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<GtaTestDurations xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Executable>D:\mp2-lab1-set-master\sln\vc10\Debug\test_bitfield.exe</Executable>
+  <TestDurations>
+    <TestDuration Test="TBitField.can_create_bitfield_with_positive_length" Duration="1" />
+    <TestDuration Test="TBitField.can_get_length" Duration="1" />
+    <TestDuration Test="TBitField.new_bitfield_is_set_to_zero" Duration="1" />
+    <TestDuration Test="TBitField.can_set_bit" Duration="1" />
+    <TestDuration Test="TBitField.can_clear_bit" Duration="1" />
+    <TestDuration Test="TBitField.throws_when_create_bitfield_with_negative_length" Duration="1" />
+    <TestDuration Test="TBitField.throws_when_set_bit_with_negative_index" Duration="1" />
+    <TestDuration Test="TBitField.throws_when_set_bit_with_too_large_index" Duration="1" />
+    <TestDuration Test="TBitField.throws_when_get_bit_with_negative_index" Duration="1" />
+    <TestDuration Test="TBitField.throws_when_get_bit_with_too_large_index" Duration="1" />
+    <TestDuration Test="TBitField.throws_when_clear_bit_with_negative_index" Duration="1" />
+    <TestDuration Test="TBitField.throws_when_clear_bit_with_too_large_index" Duration="1" />
+    <TestDuration Test="TBitField.can_assign_bitfields_of_equal_size" Duration="1" />
+    <TestDuration Test="TBitField.assign_operator_changes_bitfield_size" Duration="1" />
+    <TestDuration Test="TBitField.can_assign_bitfields_of_non_equal_size" Duration="1" />
+    <TestDuration Test="TBitField.compare_equal_bitfields_of_equal_size" Duration="1" />
+    <TestDuration Test="TBitField.or_operator_applied_to_bitfields_of_equal_size" Duration="1" />
+    <TestDuration Test="TBitField.or_operator_applied_to_bitfields_of_non_equal_size" Duration="1" />
+    <TestDuration Test="TBitField.and_operator_applied_to_bitfields_of_equal_size" Duration="1" />
+    <TestDuration Test="TBitField.and_operator_applied_to_bitfields_of_non_equal_size" Duration="1" />
+    <TestDuration Test="TBitField.can_invert_bitfield" Duration="1" />
+    <TestDuration Test="TBitField.can_invert_large_bitfield" Duration="1" />
+    <TestDuration Test="TBitField.invert_plus_and_operator_on_different_size_bitfield" Duration="1" />
+    <TestDuration Test="TBitField.can_invert_many_random_bits_bitfield" Duration="1" />
+    <TestDuration Test="TBitField.bitfields_with_different_bits_are_not_equal" Duration="1" />
+    <TestDuration Test="TSet.can_get_max_power_set" Duration="1" />
+    <TestDuration Test="TSet.can_insert_non_existing_element" Duration="1" />
+    <TestDuration Test="TSet.can_insert_existing_element" Duration="1" />
+    <TestDuration Test="TSet.can_delete_non_existing_element" Duration="1" />
+    <TestDuration Test="TSet.can_delete_existing_element" Duration="1" />
+    <TestDuration Test="TSet.compare_two_sets_of_non_equal_sizes" Duration="1" />
+    <TestDuration Test="TSet.compare_two_equal_sets" Duration="1" />
+    <TestDuration Test="TSet.compare_two_non_equal_sets" Duration="1" />
+    <TestDuration Test="TSet.can_assign_set_of_equal_size" Duration="1" />
+    <TestDuration Test="TSet.can_assign_set_of_greater_size" Duration="1" />
+    <TestDuration Test="TSet.can_assign_set_of_less_size" Duration="1" />
+    <TestDuration Test="TSet.can_insert_non_existing_element_using_plus_operator" Duration="1" />
+    <TestDuration Test="TSet.throws_when_insert_non_existing_element_out_of_range_using_plus_operator" Duration="1" />
+    <TestDuration Test="TSet.can_insert_existing_element_using_plus_operator" Duration="1" />
+    <TestDuration Test="TSet.check_size_of_the_combination_of_two_sets_of_equal_size" Duration="1" />
+    <TestDuration Test="TSet.can_combine_two_sets_of_equal_size" Duration="1" />
+    <TestDuration Test="TSet.check_size_changes_of_the_combination_of_two_sets_of_non_equal_size" Duration="1" />
+    <TestDuration Test="TSet.can_combine_two_sets_of_non_equal_size" Duration="1" />
+    <TestDuration Test="TSet.can_intersect_two_sets_of_equal_size" Duration="1" />
+    <TestDuration Test="TSet.can_intersect_two_sets_of_non_equal_size" Duration="1" />
+    <TestDuration Test="TSet.check_negation_operator" Duration="1" />
+  </TestDurations>
+</GtaTestDurations>

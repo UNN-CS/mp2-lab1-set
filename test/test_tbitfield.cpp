@@ -307,5 +307,5 @@ TEST(TBitField, bitfields_with_different_bits_are_not_equal)
   bf2.SetBit(1);
   bf2.SetBit(2);
 
-  EXPECT_NE(bf1, bf2);
+  EXPECT_TRUE(bf1 != bf2);
 }

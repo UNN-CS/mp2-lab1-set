@@ -295,3 +295,32 @@ TEST(TSet, check_negation_operator)
 
   EXPECT_EQ(expSet, set1);
 }
+
+TEST(TSet, throw_when_delete_element_with_negative_index)
+{
+	const int size = 5;
+	TSet set1(size);
+	ASSERT_ANY_THROW(set1.DelElem(-3));
+}
+
+TEST(TSet, true_double_insert_operation)
+{
+	const int size = 8;
+	TSet set1(size);
+
+	set1.InsElem(4);
+	set1.InsElem(4);
+
+	EXPECT_EQ(1, set1.IsMember(4));
+}
+TEST(TSet, true_double_delete_operation)
+{
+	const int size = 8;
+	TSet set1(size);
+
+	set1.InsElem(3);
+	set1.DelElem(3);
+	set1.DelElem(3);
+
+	EXPECT_EQ(0, set1.IsMember(3));
+}

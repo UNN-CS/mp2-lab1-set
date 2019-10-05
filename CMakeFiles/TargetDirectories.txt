@@ -1,0 +1,14 @@
+/home/anthonyquantum/mp2-lab1-set/CMakeFiles/rebuild_cache.dir
+/home/anthonyquantum/mp2-lab1-set/CMakeFiles/edit_cache.dir
+/home/anthonyquantum/mp2-lab1-set/src/CMakeFiles/edit_cache.dir
+/home/anthonyquantum/mp2-lab1-set/src/CMakeFiles/rebuild_cache.dir
+/home/anthonyquantum/mp2-lab1-set/src/CMakeFiles/set.dir
+/home/anthonyquantum/mp2-lab1-set/samples/CMakeFiles/edit_cache.dir
+/home/anthonyquantum/mp2-lab1-set/samples/CMakeFiles/rebuild_cache.dir
+/home/anthonyquantum/mp2-lab1-set/samples/CMakeFiles/sample_prime_numbers.dir
+/home/anthonyquantum/mp2-lab1-set/gtest/CMakeFiles/rebuild_cache.dir
+/home/anthonyquantum/mp2-lab1-set/gtest/CMakeFiles/edit_cache.dir
+/home/anthonyquantum/mp2-lab1-set/gtest/CMakeFiles/gtest.dir
+/home/anthonyquantum/mp2-lab1-set/test/CMakeFiles/rebuild_cache.dir
+/home/anthonyquantum/mp2-lab1-set/test/CMakeFiles/edit_cache.dir
+/home/anthonyquantum/mp2-lab1-set/test/CMakeFiles/test_set.dir

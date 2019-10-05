@@ -57,9 +57,33 @@ include test/CMakeFiles/test_set.dir/progress.make
 # Include the compile flags for this target's objects.
 include test/CMakeFiles/test_set.dir/flags.make
 
+test/CMakeFiles/test_set.dir/test_additional.cpp.o: test/CMakeFiles/test_set.dir/flags.make
+test/CMakeFiles/test_set.dir/test_additional.cpp.o: ../test/test_additional.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/anthonyquantum/mp2-lab1-set/Debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object test/CMakeFiles/test_set.dir/test_additional.cpp.o"
+	cd /home/anthonyquantum/mp2-lab1-set/Debug/test && /usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/test_set.dir/test_additional.cpp.o -c /home/anthonyquantum/mp2-lab1-set/test/test_additional.cpp
+
+test/CMakeFiles/test_set.dir/test_additional.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/test_set.dir/test_additional.cpp.i"
+	cd /home/anthonyquantum/mp2-lab1-set/Debug/test && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/anthonyquantum/mp2-lab1-set/test/test_additional.cpp > CMakeFiles/test_set.dir/test_additional.cpp.i
+
+test/CMakeFiles/test_set.dir/test_additional.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/test_set.dir/test_additional.cpp.s"
+	cd /home/anthonyquantum/mp2-lab1-set/Debug/test && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/anthonyquantum/mp2-lab1-set/test/test_additional.cpp -o CMakeFiles/test_set.dir/test_additional.cpp.s
+
+test/CMakeFiles/test_set.dir/test_additional.cpp.o.requires:
+
+.PHONY : test/CMakeFiles/test_set.dir/test_additional.cpp.o.requires
+
+test/CMakeFiles/test_set.dir/test_additional.cpp.o.provides: test/CMakeFiles/test_set.dir/test_additional.cpp.o.requires
+	$(MAKE) -f test/CMakeFiles/test_set.dir/build.make test/CMakeFiles/test_set.dir/test_additional.cpp.o.provides.build
+.PHONY : test/CMakeFiles/test_set.dir/test_additional.cpp.o.provides
+
+test/CMakeFiles/test_set.dir/test_additional.cpp.o.provides.build: test/CMakeFiles/test_set.dir/test_additional.cpp.o
+
+
 test/CMakeFiles/test_set.dir/test_main.cpp.o: test/CMakeFiles/test_set.dir/flags.make
 test/CMakeFiles/test_set.dir/test_main.cpp.o: ../test/test_main.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/anthonyquantum/mp2-lab1-set/Debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object test/CMakeFiles/test_set.dir/test_main.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/anthonyquantum/mp2-lab1-set/Debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object test/CMakeFiles/test_set.dir/test_main.cpp.o"
 	cd /home/anthonyquantum/mp2-lab1-set/Debug/test && /usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/test_set.dir/test_main.cpp.o -c /home/anthonyquantum/mp2-lab1-set/test/test_main.cpp
 
 test/CMakeFiles/test_set.dir/test_main.cpp.i: cmake_force
@@ -83,7 +107,7 @@ test/CMakeFiles/test_set.dir/test_main.cpp.o.provides.build: test/CMakeFiles/tes
 
 test/CMakeFiles/test_set.dir/test_tbitfield.cpp.o: test/CMakeFiles/test_set.dir/flags.make
 test/CMakeFiles/test_set.dir/test_tbitfield.cpp.o: ../test/test_tbitfield.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/anthonyquantum/mp2-lab1-set/Debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object test/CMakeFiles/test_set.dir/test_tbitfield.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/anthonyquantum/mp2-lab1-set/Debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object test/CMakeFiles/test_set.dir/test_tbitfield.cpp.o"
 	cd /home/anthonyquantum/mp2-lab1-set/Debug/test && /usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/test_set.dir/test_tbitfield.cpp.o -c /home/anthonyquantum/mp2-lab1-set/test/test_tbitfield.cpp
 
 test/CMakeFiles/test_set.dir/test_tbitfield.cpp.i: cmake_force
@@ -107,7 +131,7 @@ test/CMakeFiles/test_set.dir/test_tbitfield.cpp.o.provides.build: test/CMakeFile
 
 test/CMakeFiles/test_set.dir/test_tset.cpp.o: test/CMakeFiles/test_set.dir/flags.make
 test/CMakeFiles/test_set.dir/test_tset.cpp.o: ../test/test_tset.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/anthonyquantum/mp2-lab1-set/Debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object test/CMakeFiles/test_set.dir/test_tset.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/anthonyquantum/mp2-lab1-set/Debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object test/CMakeFiles/test_set.dir/test_tset.cpp.o"
 	cd /home/anthonyquantum/mp2-lab1-set/Debug/test && /usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/test_set.dir/test_tset.cpp.o -c /home/anthonyquantum/mp2-lab1-set/test/test_tset.cpp
 
 test/CMakeFiles/test_set.dir/test_tset.cpp.i: cmake_force
@@ -131,6 +155,7 @@ test/CMakeFiles/test_set.dir/test_tset.cpp.o.provides.build: test/CMakeFiles/tes
 
 # Object files for target test_set
 test_set_OBJECTS = \
+"CMakeFiles/test_set.dir/test_additional.cpp.o" \
 "CMakeFiles/test_set.dir/test_main.cpp.o" \
 "CMakeFiles/test_set.dir/test_tbitfield.cpp.o" \
 "CMakeFiles/test_set.dir/test_tset.cpp.o"
@@ -138,6 +163,7 @@ test_set_OBJECTS = \
 # External object files for target test_set
 test_set_EXTERNAL_OBJECTS =
 
+bin/test_set: test/CMakeFiles/test_set.dir/test_additional.cpp.o
 bin/test_set: test/CMakeFiles/test_set.dir/test_main.cpp.o
 bin/test_set: test/CMakeFiles/test_set.dir/test_tbitfield.cpp.o
 bin/test_set: test/CMakeFiles/test_set.dir/test_tset.cpp.o
@@ -145,7 +171,7 @@ bin/test_set: test/CMakeFiles/test_set.dir/build.make
 bin/test_set: lib/libgtest.a
 bin/test_set: lib/libset.a
 bin/test_set: test/CMakeFiles/test_set.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/anthonyquantum/mp2-lab1-set/Debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking CXX executable ../bin/test_set"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/anthonyquantum/mp2-lab1-set/Debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Linking CXX executable ../bin/test_set"
 	cd /home/anthonyquantum/mp2-lab1-set/Debug/test && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/test_set.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -153,6 +179,7 @@ test/CMakeFiles/test_set.dir/build: bin/test_set
 
 .PHONY : test/CMakeFiles/test_set.dir/build
 
+test/CMakeFiles/test_set.dir/requires: test/CMakeFiles/test_set.dir/test_additional.cpp.o.requires
 test/CMakeFiles/test_set.dir/requires: test/CMakeFiles/test_set.dir/test_main.cpp.o.requires
 test/CMakeFiles/test_set.dir/requires: test/CMakeFiles/test_set.dir/test_tbitfield.cpp.o.requires
 test/CMakeFiles/test_set.dir/requires: test/CMakeFiles/test_set.dir/test_tset.cpp.o.requires

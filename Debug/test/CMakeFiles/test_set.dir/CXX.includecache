@@ -140,6 +140,16 @@ iostream
 tbitfield.h
 ../include/tbitfield.h
 
+/home/anthonyquantum/mp2-lab1-set/test/test_additional.cpp
+tbitfield.h
+/home/anthonyquantum/mp2-lab1-set/test/tbitfield.h
+tset.h
+/home/anthonyquantum/mp2-lab1-set/test/tset.h
+gtest.h
+-
+cmath
+-
+
 /home/anthonyquantum/mp2-lab1-set/test/test_main.cpp
 gtest.h
 -

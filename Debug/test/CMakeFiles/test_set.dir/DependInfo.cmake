@@ -4,6 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
+  "/home/anthonyquantum/mp2-lab1-set/test/test_additional.cpp" "/home/anthonyquantum/mp2-lab1-set/Debug/test/CMakeFiles/test_set.dir/test_additional.cpp.o"
   "/home/anthonyquantum/mp2-lab1-set/test/test_main.cpp" "/home/anthonyquantum/mp2-lab1-set/Debug/test/CMakeFiles/test_set.dir/test_main.cpp.o"
   "/home/anthonyquantum/mp2-lab1-set/test/test_tbitfield.cpp" "/home/anthonyquantum/mp2-lab1-set/Debug/test/CMakeFiles/test_set.dir/test_tbitfield.cpp.o"
   "/home/anthonyquantum/mp2-lab1-set/test/test_tset.cpp" "/home/anthonyquantum/mp2-lab1-set/Debug/test/CMakeFiles/test_set.dir/test_tset.cpp.o"

@@ -125,6 +125,33 @@ test_set/fast:
 	cd /home/anthonyquantum/mp2-lab1-set/Debug && $(MAKE) -f test/CMakeFiles/test_set.dir/build.make test/CMakeFiles/test_set.dir/build
 .PHONY : test_set/fast
 
+test_additional.o: test_additional.cpp.o
+
+.PHONY : test_additional.o
+
+# target to build an object file
+test_additional.cpp.o:
+	cd /home/anthonyquantum/mp2-lab1-set/Debug && $(MAKE) -f test/CMakeFiles/test_set.dir/build.make test/CMakeFiles/test_set.dir/test_additional.cpp.o
+.PHONY : test_additional.cpp.o
+
+test_additional.i: test_additional.cpp.i
+
+.PHONY : test_additional.i
+
+# target to preprocess a source file
+test_additional.cpp.i:
+	cd /home/anthonyquantum/mp2-lab1-set/Debug && $(MAKE) -f test/CMakeFiles/test_set.dir/build.make test/CMakeFiles/test_set.dir/test_additional.cpp.i
+.PHONY : test_additional.cpp.i
+
+test_additional.s: test_additional.cpp.s
+
+.PHONY : test_additional.s
+
+# target to generate assembly for a file
+test_additional.cpp.s:
+	cd /home/anthonyquantum/mp2-lab1-set/Debug && $(MAKE) -f test/CMakeFiles/test_set.dir/build.make test/CMakeFiles/test_set.dir/test_additional.cpp.s
+.PHONY : test_additional.cpp.s
+
 test_main.o: test_main.cpp.o
 
 .PHONY : test_main.o
@@ -215,6 +242,9 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
 	@echo "... test_set"
+	@echo "... test_additional.o"
+	@echo "... test_additional.i"
+	@echo "... test_additional.s"
 	@echo "... test_main.o"
 	@echo "... test_main.i"
 	@echo "... test_main.s"

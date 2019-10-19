@@ -9,6 +9,6 @@ script:
   - cmake ../mp2-lab1-set
   - make -j
   - cd ./bin/
-  - ./test_set --gtest_list_tests
+  - ./test_set
 notifications:
   email: false

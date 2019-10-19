@@ -1,0 +1,24 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../include/tbitfield.h
+iostream
+-
+
+../include/tset.h
+tbitfield.h
+../include/tbitfield.h
+
+/home/anthonyquantum/mp2-lab1-set/src/tbitfield.cpp
+tbitfield.h
+/home/anthonyquantum/mp2-lab1-set/src/tbitfield.h
+
+/home/anthonyquantum/mp2-lab1-set/src/tset.cpp
+tset.h
+/home/anthonyquantum/mp2-lab1-set/src/tset.h
+

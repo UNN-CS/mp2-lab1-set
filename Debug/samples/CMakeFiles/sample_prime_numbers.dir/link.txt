@@ -1,0 +1,1 @@
+/usr/bin/c++   -g   CMakeFiles/sample_prime_numbers.dir/sample_prime_numbers.cpp.o  -o ../bin/sample_prime_numbers -rdynamic ../lib/libset.a 
